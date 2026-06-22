@@ -94,6 +94,14 @@
   --text-xs: 12px;
   --text-xs--line-height: 24px;
 
+  --text-display-hero: clamp(2.25rem, 1.218rem + 4.202vw, 5rem);
+  --text-display-hero--line-height: clamp(3rem, 6.76vw, 5rem);
+
+  /* --- Letter Spacing --- */
+  --tracking-t-none: 0em;
+  --tracking-t-2: -0.02em;
+  --tracking-t-3: -0.03em;
+
   /* --- Spacing --- */
   --spacing-xxs: 2px;
   --spacing-xs: 4px;
@@ -112,6 +120,23 @@
   --spacing-10xl: 128px;
   --spacing-11xl: 140px;
 
+  /* --- Responsive font size tokens --- */
+  /* body-responsive: 14px → 16px */
+  --text-body-responsive: clamp(0.88rem, 1.11vw, 1rem);
+  --text-body-responsive--line-height: clamp(1.75rem, 2.08vw, 1.88rem);
+
+  /* label-responsive: 14px → 18px */
+  --text-label-responsive: clamp(0.88rem, 1.25vw, 1.13rem);
+  --text-label-responsive--line-height: clamp(1.75rem, 2.22vw, 2rem);
+
+  /* title-responsive: 16px → 24px */
+  --text-title-responsive: clamp(1rem, 1.67vw, 1.5rem);
+  --text-title-responsive--line-height: clamp(1.88rem, 2.5vw, 2.25rem);
+
+  /* --- Work card logo --- */
+  --work-logo-width: clamp(4.75rem, 7.92vw, 7.13rem);
+  --work-logo-height: clamp(2rem, 3.33vw, 3rem);
+
   /* --- Shadow --- */
   --shadow-glow-primary: 0px 4px 40px rgba(145, 255, 2, 0.4);
 }
@@ -126,6 +151,6 @@
 /* --- Custom Container --- */
 @layer components {
   .custom-container {
-    @apply max-w-[1440px] min-w-[393px] mx-auto px-4 md:px-10 lg:px-32;
+    @apply max-w-[1440px] min-w-[393px] mx-auto px-4 md:px-[clamp(1rem,8.89vw,8rem)];
   }
 }

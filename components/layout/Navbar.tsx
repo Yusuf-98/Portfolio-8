@@ -19,6 +19,17 @@ const NAV_LINKS = [
 
 export function Navbar() {
   const [open, setOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  // --- Detect scroll to toggle navbar background ---
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 8);
+    };
+    window.addEventListener('scroll', handleScroll);
+    handleScroll();
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   // --- Auto-close mobile menu when screen reaches md breakpoint ---
   useEffect(() => {
@@ -35,19 +46,30 @@ export function Navbar() {
   }, []);
 
   return (
-    <header className='sticky top-0 z-50 w-full border-b border-neutral-800 bg-base-black'>
+    <header
+      className={`sticky top-0 z-50 w-full transition-colors duration-300 ${
+        isScrolled
+          ? 'border-b border-neutral-800 bg-base-black'
+          : 'border-b border-transparent bg-transparent'
+      }`}
+    >
       <Container>
-        <div className='flex h-20 items-center justify-between'>
-          {/* --- Logo --- */}
-          <Link href='#hero' className='flex items-center gap-2 lg:gap-3'>
-            <span className='h-px w-6 bg-base-white md:w-10' />
-            <span className='text-md font-bold text-primary-200 md:text-xl'>
-              Yusuf Arif.
-            </span>
-          </Link>
+        <div className='flex h-20 items-center justify-between gap-4xl'>
+          <div className='flex items-center w-full'>
+            {/* --- Logo --- */}
+            <Link
+              href='#hero'
+              className='flex w-full items-center gap-2.25 md:gap-2'
+            >
+              <span className='h-0 border w-6 border-base-white md:w-10' />
+              <span className='w-full text-md font-bold text-primary-200 md:text-xl md:p-2'>
+                Edwin Anderson.
+              </span>
+            </Link>
+          </div>
 
           {/* --- Desktop Nav --- */}
-          <nav className='hidden items-center gap-6xl md:flex'>
+          <nav className='hidden items-center justify-center gap-4xl md:flex'>
             {NAV_LINKS.map((link) => (
               <motion.div
                 key={link.href}
@@ -56,7 +78,7 @@ export function Navbar() {
               >
                 <Link
                   href={link.href}
-                  className='text-md text-base-white transition-colors duration-300 hover:text-primary-200'
+                  className='flex p-2 gap-2 text-md text-base-white transition-colors duration-300 hover:text-primary-200'
                 >
                   {link.label}
                 </Link>
@@ -70,7 +92,7 @@ export function Navbar() {
               <button
                 type='button'
                 aria-label='Open menu'
-                className='flex h-6 w-6 items-center justify-center md:hidden'
+                className='flex h-8 w-8 items-center justify-center md:hidden'
               >
                 <Image
                   src='/icons/menu-04.png'
@@ -111,7 +133,7 @@ export function Navbar() {
                       <div className='flex items-center justify-between'>
                         <Dialog.Title className='flex items-center gap-2 text-md font-bold text-primary-200'>
                           <span className='h-px w-6 bg-base-white' />
-                          Yusuf Arif.
+                          Edwin Anderson.
                         </Dialog.Title>
                         <Dialog.Close asChild>
                           <button

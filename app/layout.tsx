@@ -9,9 +9,9 @@ const redHatDisplay = Red_Hat_Display({
 });
 
 export const metadata: Metadata = {
-  title: 'Yusuf Arif | Frontend Developer Portfolio',
+  title: 'Edwin Anderson | Frontend Developer Portfolio',
   description:
-    'Portfolio of Yusuf Arif, a Frontend Developer building responsive, fast, and scalable websites.',
+    'Portfolio of Edwin Anderson, a Frontend Developer building responsive, fast, and scalable websites.',
 };
 
 export default function RootLayout({
@@ -20,10 +20,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang='en'>
-      <body className={`${redHatDisplay.variable} font-display`}>
-        {children}
-      </body>
+    <html lang='en' className={`${redHatDisplay.variable}`}>
+      <body className='antialiased'>{children}</body>
     </html>
   );
 }

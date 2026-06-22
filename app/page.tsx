@@ -1,14 +1,21 @@
 import { Navbar } from '@/components/layout/Navbar';
+import { About } from '@/components/sections/About';
+import { Experience } from '@/components/sections/Experience';
+import { Hero } from '@/components/sections/Hero';
+import { Services } from '@/components/sections/Services';
+import { Skills } from '@/components/sections/Skills';
+import WorkSection from '@/components/sections/WorkSection';
 
 export default function Home() {
   return (
     <main>
       <Navbar />
-
-      {/* --- Hero Section (next step) --- */}
-      <section id='hero' className='flex h-[50vh] items-center justify-center'>
-        <p className='text-md text-neutral-500'>Hero Section — coming next</p>
-      </section>
+      <Hero />
+      <Services />
+      <About />
+      <Skills />
+      <Experience />
+      <WorkSection />
     </main>
   );
 }
