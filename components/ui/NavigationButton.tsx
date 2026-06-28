@@ -34,7 +34,7 @@ export function NavigationButton({
   const defaultSrc = `/icons/arrow-left-${suffix}.png`;
   const hoverSrc = `/icons/right-arrow-${suffix}.png`;
 
-  // Kiri: default=normal, hover=normal (keduanya sudah arrow kiri / kanan yang di-flip)
+  // Kiri: default=normal, hover=normal
   // Kanan: default=scaleX(-1), hover=normal
   const src = isHovered ? hoverSrc : defaultSrc;
   const shouldFlip = direction === 'right' ? !isHovered : isHovered;

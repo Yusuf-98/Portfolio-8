@@ -52,10 +52,13 @@ const faqData = [
 // --- FAQ Section ---
 export default function FAQSection() {
   return (
-    <section className='w-full max-w-360 mx-auto bg-base-black py-10 md:py-20'>
+    <section
+      id='faq'
+      className='relative w-full max-w-360 mx-auto bg-base-black py-10 md:py-20 z-20'
+    >
       <Container>
         {/* --- FAQ Header --- */}
-        <div className='flex flex-col items-center gap-2 mb-8 md:mb-16'>
+        <div className='flex flex-col items-center gap-2 mb-2 md:mb-16 z-20'>
           {/* Section label */}
           <motion.span
             variants={fadeInUp}
@@ -63,7 +66,7 @@ export default function FAQSection() {
             whileInView='visible'
             viewport={{ once: true, amount: 0.2 }}
             transition={transitionDelayed(0)}
-            className='text-md font-medium text-primary-200 md:text-lg'
+            className='text-md font-medium text-primary-200 md:text-sec-label'
           >
             FAQ
           </motion.span>
@@ -75,7 +78,7 @@ export default function FAQSection() {
             whileInView='visible'
             viewport={{ once: true, amount: 0.2 }}
             transition={transitionDelayed(0.15)}
-            className='text-display-md tracking-t-none font-extrabold text-neutral-25 text-center md:text-display-2xl'
+            className='text-display-md tracking-t-none font-extrabold text-neutral-25 text-center md:text-sec-title'
           >
             FREQUENTLY ASKED QUESTIONS
           </motion.h2>

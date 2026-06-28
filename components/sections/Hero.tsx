@@ -1,15 +1,13 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import Link from 'next/link';
 import {
   fadeInUp,
   fadeInDown,
   fadeInScale,
-  fadeIn,
-  transition,
   transitionDelayed,
   transitionScaleDelayed,
-  viewportEarly,
 } from '@/lib/animations/staggered-item';
 import { Container } from '../layout/Container';
 import HelmOverlay from '../hero/HelmOverlay';
@@ -160,7 +158,7 @@ export function Hero() {
 
       {/* Box pattern decoration */}
       <motion.div
-        className='absolute bottom-56 md:bottom-0 h-[69px] w-[103.5px] md:h-[92px] md:w-[138px] z-50'
+        className='absolute bottom-56 md:bottom-0 h-17.25 w-[103.5px] md:h-23 md:w-34.5 z-50'
         style={{ left: 0 }}
         variants={fadeInUp}
         initial='hidden'
@@ -218,7 +216,7 @@ export function Hero() {
               initial='hidden'
               animate='visible'
               transition={transitionDelayed(D_SUBTITLE)}
-              className='mt-xl font-medium text-lg text-neutral-400 md:max-w-[597px] md:text-xl'
+              className='mt-xl font-medium text-lg text-neutral-400 md:max-w-149.25 md:text-xl'
             >
               {SUBTITLE_TEXT}
             </motion.p>
@@ -229,9 +227,13 @@ export function Hero() {
               initial='hidden'
               animate='visible'
               transition={transitionDelayed(D_BUTTON)}
-              className='mt-10 md:mt-[clamp(2.5rem,0.1925rem+4.808vw,3.75rem)] w-full md:w-[300px]'
+              className='mt-10 md:mt-[clamp(2.5rem,0.1925rem+4.808vw,3.75rem)] w-full md:w-75'
             >
-              <Button className='w-full uppercase'>Hire Me</Button>
+              <Link href='#contact'>
+                <Button className='w-full uppercase cursor-pointer'>
+                  Hire Me
+                </Button>
+              </Link>
             </motion.div>
           </div>
 
@@ -363,7 +365,7 @@ export function Hero() {
 
         {/* Wrapper B: color reveal canvas */}
         <div
-          className='absolute left-[-1.5%] top-[-0.8%] h-[100%] w-[100.5%] pointer-events-none'
+          className='absolute left-[-1.5%] top-[-0.8%] h-full w-[100.5%] pointer-events-none'
           style={{ transform: 'rotate(-1.45deg)' }}
         >
           <canvas

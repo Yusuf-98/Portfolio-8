@@ -30,8 +30,10 @@ export function Button({ children, icon, className, ...props }: ButtonProps) {
       whileHover={{
         scale: 1.03,
         boxShadow: '0 0 24px 6px rgba(145, 255, 2, 0.45)',
+        transition: { duration: 0.5, ease: 'easeInOut' },
       }}
       whileTap={{ scale: 0.97 }}
+      transition={{ duration: 0.5, ease: 'easeInOut' }}
       className={cn(
         'relative inline-flex items-center justify-center gap-2 overflow-hidden',
         'rounded-full bg-primary-200 p-2 text-sm lg:text-md font-bold text-neutral-950',

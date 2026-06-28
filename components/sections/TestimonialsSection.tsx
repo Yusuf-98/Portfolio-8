@@ -78,10 +78,10 @@ export default function TestimonialsSection() {
   };
 
   return (
-    <section className='w-full max-w-360 mx-auto bg-base-black py-10 md:py-20'>
+    <section className='relative w-full max-w-360 mx-auto bg-base-black py-10 md:py-20 z-20'>
       <Container>
         {/* --- Testimonials Header --- */}
-        <div className='flex flex-col items-center gap-2 mb-6 md:mb-16'>
+        <div className='flex flex-col items-center gap-2 mb-2 md:mb-16 z-20'>
           {/* Section label */}
           <motion.span
             variants={fadeInUp}
@@ -89,7 +89,7 @@ export default function TestimonialsSection() {
             whileInView='visible'
             viewport={{ once: true, amount: 0.2 }}
             transition={transitionDelayed(0)}
-            className='text-md font-medium text-primary-200 md:text-lg'
+            className='text-md font-medium text-primary-200 md:text-sec-label'
           >
             TESTIMONIALS
           </motion.span>
@@ -101,14 +101,14 @@ export default function TestimonialsSection() {
             whileInView='visible'
             viewport={{ once: true, amount: 0.2 }}
             transition={transitionDelayed(0.15)}
-            className='text-display-md tracking-t-none font-bold text-neutral-25 text-center md:text-display-2xl md:font-extrabold'
+            className='text-display-md tracking-t-none font-bold text-neutral-25 text-center md:text-sec-title md:font-extrabold'
           >
             PEOPLE SAYS ABOUT ME
           </motion.h2>
         </div>
 
         {/* --- Desktop: 2x2 grid statis --- */}
-        <div className='hidden md:flex flex-col gap-[35px]'>
+        <div className='hidden md:flex flex-col gap-10'>
           {/* Row 1 */}
           <div className='flex flex-row gap-6'>
             <motion.div

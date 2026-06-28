@@ -13,11 +13,7 @@ import {
   HELM_N_BANDS,
 } from './helmGeometry';
 
-// --- Helm Wireframe Overlay (sketsa-25, v3) ---
-// Kontur mengikuti siluet kepala asli. Animasi BAND-SCANNING: dome SELALU full
-// dari ubun-ubun s/d bawah dagu, yang bergerak cuma opacity per-band (termasuk
-// outline kiri-kanan ikut tersegmentasi, bukan cuma garis dalam).
-// 1 band di posisi "peak" = opacity 100%, tetangga (jarak 1) = 50%, sisanya 0%.
+// --- Helm Wireframe Overlay ---
 
 type HelmOverlayProps = {
   className?: string;
@@ -108,7 +104,7 @@ export default function HelmOverlay({
         );
       })}
 
-      {/* --- Meridian lines (vertical-ish), segmented by band along length --- */}
+      {/* --- Meridian lines (vertical-ish) --- */}
       {HELM_MERIDIAN_LINES.map((line, lineIdx) =>
         segmentByBand(line.points, peak).map((seg) => (
           <path
@@ -123,7 +119,7 @@ export default function HelmOverlay({
         ))
       )}
 
-      {/* --- Outline left & right, ALSO segmented by band (per user requirement) --- */}
+      {/* --- Outline left & right --- */}
       {segmentByBand(HELM_OUTLINE_LEFT, peak).map((seg) => (
         <path
           key={`out-l-${seg.key}`}

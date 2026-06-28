@@ -265,7 +265,7 @@ export default function WorkTimeline() {
               </div>
 
               {/* Spacer kiri */}
-              <div className='hidden md:block w-[30px] lg:w-16 shrink-0' />
+              <div className='hidden md:block w-7.5 lg:w-16 shrink-0' />
 
               {/* Bubble desktop */}
               <div className='hidden md:flex shrink-0 z-10'>
@@ -281,7 +281,7 @@ export default function WorkTimeline() {
               </div>
 
               {/* Spacer kanan */}
-              <div className='hidden md:block w-[30px] lg:w-16 shrink-0' />
+              <div className='hidden md:block w-7.5 lg:w-16 shrink-0' />
 
               <div className='hidden md:block w-[calc(50%-54px)] lg:w-[calc(50%-88px)] shrink-0'>
                 {!isEven && (

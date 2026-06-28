@@ -27,10 +27,10 @@ export function ServiceCard({
       viewport={{ once: true, amount: 0.3 }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
       whileHover={{ scale: 1.05 }}
-      className='flex flex-1 flex-col gap-3 md:gap-6 cursor-pointer'
+      className='flex flex-1 flex-col gap-3 md:gap-sec-card-title cursor-pointer'
     >
       {/* Service number */}
-      <span className='text-md md:text-xl font-semibold text-neutral-400'>
+      <span className='text-md md:text-sec-body font-semibold text-neutral-400'>
         {number}
       </span>
 
@@ -48,12 +48,12 @@ export function ServiceCard({
       <Image src={icon} alt='' width={32} height={32} className='h-8 w-8' />
 
       {/* Service title */}
-      <h3 className='text-xl md:text-display-sm font-semibold text-neutral-25'>
+      <h3 className='text-xl md:text-sec-card-title font-semibold text-neutral-25'>
         {title}
       </h3>
 
       {/* Service description */}
-      <p className='text-md md:text-xl font-normal text-neutral-400'>
+      <p className='text-md md:text-sec-body font-normal text-neutral-400'>
         {description}
       </p>
     </motion.div>

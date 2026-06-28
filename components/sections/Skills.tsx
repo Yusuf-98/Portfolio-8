@@ -44,11 +44,14 @@ const D_BAR_STAGGER = 0.3;
 // --- Skills section ---
 export function Skills() {
   return (
-    <section className='w-full max-w-360 mx-auto bg-base-black py-10 md:pt-[76px]'>
+    <section
+      id='skills'
+      className='w-full max-w-360 mx-auto bg-base-black py-10 md:pt-19'
+    >
       <Container>
-        <div className='flex flex-col gap-10 md:flex-row md:items-center md:gap-[58px]'>
+        <div className='flex flex-col gap-10 md:flex-row md:items-center md:gap-sec-skill-content'>
           {/* Skills content */}
-          <div className='flex flex-col gap-6 md:w-[524px] md:shrink-0 md:gap-[58px]'>
+          <div className='flex flex-col gap-6 md:basis-90.25 md:grow-4 md:gap-sec-skill-content'>
             <div className='flex flex-col gap-2'>
               {/* Skills label */}
               <motion.span
@@ -57,7 +60,7 @@ export function Skills() {
                 whileInView='visible'
                 viewport={{ once: true, amount: 0.2 }}
                 transition={transitionDelayed(D_LABEL)}
-                className='text-md font-medium text-primary-200 md:text-lg'
+                className='text-md font-medium text-primary-200 md:text-sec-label'
               >
                 SKILLS
               </motion.span>
@@ -69,7 +72,7 @@ export function Skills() {
                 whileInView='visible'
                 viewport={{ once: true, amount: 0.2 }}
                 transition={transitionDelayed(D_TITLE)}
-                className='text-display-md tracking-t-none font-extrabold text-neutral-25 md:text-display-2xl'
+                className='text-display-md tracking-t-none font-extrabold text-neutral-25 md:text-sec-title'
               >
                 SKILLS THAT BRING IDEAS TO LIFE
               </motion.h2>
@@ -77,7 +80,7 @@ export function Skills() {
 
             {/* Tech icon grid */}
             <div className='flex flex-col gap-6'>
-              {/* Baris 1 - fadeInDown */}
+              {/* Baris 1 */}
               <div className='flex flex-row gap-6'>
                 {TECH_ICONS.slice(0, 4).map((icon, i) => (
                   <motion.div
@@ -102,7 +105,7 @@ export function Skills() {
                 ))}
               </div>
 
-              {/* Baris 2 - fadeInUp */}
+              {/* Baris 2 */}
               <div className='flex flex-row gap-6'>
                 {TECH_ICONS.slice(4, 8).map((icon, i) => (
                   <motion.div
@@ -130,7 +133,7 @@ export function Skills() {
           </div>
 
           {/* Skill bars */}
-          <div className='flex w-full flex-col gap-4 md:gap-6'>
+          <div className='flex w-full flex-col gap-4 md:basis-90.25 md:grow-6 md:gap-sec-skill-bar'>
             {SKILLS.map((skill, index) => (
               <SkillBar
                 key={`${skill.name}-${index}`}

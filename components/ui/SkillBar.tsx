@@ -45,15 +45,12 @@ export function SkillBar({
     <div
       ref={ref}
       className={cn(
-        'flex h-10 w-full items-center gap-4 md:h-16 md:gap-6',
+        'flex h-10 md:h-[clamp(2.5rem,1.937rem+2.292vw,4rem)] w-full items-center gap-4 md:gap-sec-skill-bar',
         className
       )}
     >
       {/* Skill bar content */}
-      <div
-        className='flex h-full items-center'
-        style={{ width: 'var(--size-skill-bar-content)' }}
-      >
+      <div className='flex h-full flex-1 items-center'>
         {/* Skill bar label */}
         <motion.div
           className='relative flex h-full items-center overflow-hidden rounded-[12.94px] md:rounded-[20px]'
@@ -66,7 +63,7 @@ export function SkillBar({
             isolation: 'isolate',
           }}
         >
-          <span className='relative z-10 whitespace-nowrap px-[15.52px] py-[5.17px] text-sm font-semibold text-neutral-25 md:px-6 md:py-2 md:text-lg'>
+          <span className='relative z-10 whitespace-nowrap px-[15.52px] py-[5.17px] text-sm font-semibold text-neutral-25 md:px-6 md:py-2 md:text-sec-label'>
             {name}
           </span>
         </motion.div>
@@ -82,7 +79,7 @@ export function SkillBar({
       </div>
 
       {/* Skill percentage */}
-      <span className='text-right text-sm font-semibold text-base-white md:text-xl'>
+      <span className='text-right text-sm font-semibold text-base-white md:text-sec-body'>
         {count !== null ? `${count}%` : ''}
       </span>
     </div>

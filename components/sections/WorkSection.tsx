@@ -40,7 +40,7 @@ export default function WorkSection() {
             whileInView='visible'
             viewport={{ once: true, amount: 0.2 }}
             transition={transitionDelayed(0)}
-            className='text-md font-medium text-primary-200 md:text-lg'
+            className='text-md font-medium text-primary-200 md:text-sec-label'
           >
             EXPERIENCE
           </motion.span>
@@ -52,7 +52,7 @@ export default function WorkSection() {
             whileInView='visible'
             viewport={{ once: true, amount: 0.2 }}
             transition={transitionDelayed(0.15)}
-            className='text-display-md tracking-t-none font-extrabold text-neutral-25 text-center md:text-display-2xl'
+            className='text-display-md tracking-t-none font-extrabold text-neutral-25 text-center md:text-sec-title'
           >
             PROFESIONAL WORK
           </motion.h2>

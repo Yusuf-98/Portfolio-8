@@ -52,10 +52,10 @@ export function Services() {
               transition={transitionDelayed(D_HEADER)}
               className='flex flex-col w-full md:w-60 lg:w-127.25 gap-2 md:gap-2'
             >
-              <span className='text-md md:text-lg font-medium text-primary-200'>
+              <span className='text-md md:text-sec-label font-medium text-primary-200'>
                 SERVICE
               </span>
-              <h2 className='text-display-md md:text-display-2xl-0 font-extrabold text-neutral-25'>
+              <h2 className='text-display-md md:text-sec-title font-extrabold text-neutral-25'>
                 MY SERVICE EXPERTISE
               </h2>
             </motion.div>
@@ -66,7 +66,7 @@ export function Services() {
               whileInView='visible'
               viewport={{ once: true, amount: 0.2 }}
               transition={transitionDelayed(D_DESC)}
-              className='text-md md:text-xl font-medium text-neutral-400 md:max-w-[504px] md:text-right'
+              className='text-md md:text-sec-body font-medium text-neutral-400 md:max-w-[504px] md:text-right'
             >
               Creating modern, intuitive, and visually consistent web
               experiences that align with industry trends and user expectations.

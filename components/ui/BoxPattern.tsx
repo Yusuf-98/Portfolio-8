@@ -29,15 +29,15 @@ export const BoxPattern = forwardRef<HTMLDivElement, BoxPatternProps>(
         className={cn(
           'z-50 flex items-center justify-center',
           swapped
-            ? 'h-[103.5px] w-[69px] md:h-[138px] md:w-[92px]'
-            : 'h-[69px] w-[103.5px] md:h-[92px] md:w-[138px]',
+            ? 'h-[103.5px] w-17.25 md:h-34.5 md:w-23'
+            : 'h-17.25 w-[103.5px] md:h-23 md:w-34.5',
           className
         )}
         style={style}
       >
         <div
           className={cn(
-            'grid h-[69px] w-[103.5px] shrink-0 grid-cols-3 grid-rows-2 md:h-[92px] md:w-[138px]',
+            'grid h-17.25 w-[103.5px] shrink-0 grid-cols-3 grid-rows-2 md:h-23 md:w-34.5',
             rotateClass[rotate]
           )}
         >

@@ -21,7 +21,7 @@ export function TextareaField({ label, error, ...props }: TextareaFieldProps) {
           w-full bg-base-black border
           rounded-xl lg:rounded-2xl
           px-4 py-2
-          h-[120px] lg:h-[180px]
+          h-30 lg:h-45
           text-sm lg:text-md text-neutral-25
           placeholder:text-neutral-400
           outline-none focus:border-primary-200

@@ -46,7 +46,7 @@ export function PhotoReveal({ src, width, height }: PhotoRevealProps) {
     const offY = (height - drawH) / 2;
 
     ctx.clearRect(0, 0, width, height);
-    // Fill black sebagai base agar luminosity blend bekerja
+    // Fill black sebagai base
     ctx.fillStyle = '#000000';
     ctx.fillRect(0, 0, width, height);
     ctx.globalCompositeOperation = 'luminosity';
@@ -54,7 +54,7 @@ export function PhotoReveal({ src, width, height }: PhotoRevealProps) {
     ctx.globalCompositeOperation = 'source-over';
   }, [width, height]);
 
-  // --- drawColorReveal: color foto + brush mask + gradient 15% bawah ---
+  // --- drawColorReveal ---
   const drawColorReveal = useCallback(() => {
     const canvas = colorCanvasRef.current;
     const mask = maskRef.current;
@@ -81,7 +81,7 @@ export function PhotoReveal({ src, width, height }: PhotoRevealProps) {
     ctx.drawImage(mask, 0, 0, width, height);
     ctx.globalCompositeOperation = 'source-over';
 
-    // Gradient 15% bawah: hitam solid → transparent (to top)
+    // Gradient 15% bawah
     const grad = ctx.createLinearGradient(0, height, 0, height * 0.85);
     grad.addColorStop(0, 'rgba(0,0,0,1)');
     grad.addColorStop(1, 'rgba(0,0,0,0)');
@@ -211,7 +211,7 @@ export function PhotoReveal({ src, width, height }: PhotoRevealProps) {
         style={{ width: '100%', height: '100%' }}
       />
 
-      {/* Color reveal canvas - di atas grayscale dan di atas gradient Hero */}
+      {/* Color reveal canvas */}
       <canvas
         ref={colorCanvasRef}
         width={width}

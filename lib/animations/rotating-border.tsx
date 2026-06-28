@@ -3,8 +3,6 @@
 import { motion } from 'framer-motion';
 
 // --- RotatingBorder ---
-// Border gradient yang berputar melingkari elemen
-// Pakai sebagai child pertama di dalam parent yang punya position: relative
 interface RotatingBorderProps {
   duration?: number;
   color1?: string;

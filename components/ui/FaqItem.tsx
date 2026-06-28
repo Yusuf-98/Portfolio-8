@@ -11,7 +11,7 @@ import {
   transitionXDelayed,
 } from '@/lib/animations/staggered-item';
 
-// --- Card variants per direction ---
+// --- Card variants ---
 const getCardVariants = (direction: 'left' | 'right' | 'up') => {
   if (direction === 'left') return { ...fadeInLeft, hover: { scale: 1.05 } };
   if (direction === 'right') return { ...fadeInRight, hover: { scale: 1.05 } };
@@ -54,7 +54,7 @@ export function FaqItem({
       transition={cardTransition}
     >
       <FloatingBoat index={index}>
-        <div className='flex flex-col gap-2 md:gap-6 w-full cursor-pointer'>
+        <div className='flex flex-col gap-2 md:gap-sec-card-title w-full cursor-pointer'>
           {/* Content: icon + question */}
           <div className='flex flex-row items-start gap-3'>
             {/* Icon */}
@@ -69,13 +69,7 @@ export function FaqItem({
             </div>
 
             {/* Question */}
-            <h3
-              className='
-              font-bold text-neutral-25
-              text-lg leading-[32px]
-              md:text-display-xs md:leading-[36px]
-            '
-            >
+            <h3 className='font-bold text-neutral-25 text-lg md:text-sec-card-title'>
               {question}
             </h3>
           </div>
@@ -84,11 +78,7 @@ export function FaqItem({
           <motion.p
             variants={answerVariants}
             transition={{ duration: 0.4, ease: 'easeInOut' }}
-            className='
-              font-medium text-neutral-400
-              text-sm leading-[28px]
-              md:text-md md:leading-[30px]
-            '
+            className='font-medium text-neutral-400 text-sm md:text-body-responsive'
           >
             {answer}
           </motion.p>

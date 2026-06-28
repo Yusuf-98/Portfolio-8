@@ -16,10 +16,9 @@ type RatingCardProps = {
 const SCORE_TEXT = '5.0';
 const CAPTION_TEXT = 'Many Client Trust with me';
 const STAR_COUNT = 5;
-const BORDER_DRAW_DURATION = 1200;
+const BORDER_DRAW_DURATION = 4800;
 const CONTENT_START_DELAY = 200;
 const TYPE_SPEED = 90;
-// CornerGlow: duration 2s, peak di detik ke-2, total siklus 4s
 const CORNER_GLOW_PEAK_MS = 2000;
 const CORNER_GLOW_CYCLE_MS = 4000;
 
@@ -34,7 +33,6 @@ export function RatingCard({
   const [scoreText, setScoreText] = useState('');
   const [starsVisible, setStarsVisible] = useState(0);
   const [captionText, setCaptionText] = useState('');
-  const timersRef = useRef<ReturnType<typeof setTimeout>[]>([]);
   const shimmerRef = useRef<HTMLSpanElement>(null);
 
   const triggerShimmer = () => {
@@ -45,12 +43,14 @@ export function RatingCard({
     el.classList.add('card-shimmer-run');
   };
 
-  const addTimer = (fn: () => void, delay: number) => {
-    const t = setTimeout(fn, delay);
-    timersRef.current.push(t);
-  };
-
   useEffect(() => {
+    const timers: ReturnType<typeof setTimeout>[] = [];
+
+    const addTimer = (fn: () => void, delay: number) => {
+      const t = setTimeout(fn, delay);
+      timers.push(t);
+    };
+
     const startIntro = () => {
       setPhase('drawing');
 
@@ -93,11 +93,11 @@ export function RatingCard({
         triggerShimmer();
         scheduleShimmer(CORNER_GLOW_CYCLE_MS);
       }, offset);
-      timersRef.current.push(t);
+      timers.push(t);
     };
     scheduleShimmer(introDelay + CORNER_GLOW_PEAK_MS);
 
-    return () => timersRef.current.forEach(clearTimeout);
+    return () => timers.forEach(clearTimeout);
   }, [introDelay]);
 
   const isTyping = phase === 'typing';
@@ -127,7 +127,7 @@ export function RatingCard({
             rx='19.5'
             ry='19.5'
             fill='none'
-            stroke='#91FF02'
+            stroke='rgba(145, 255, 2, 0.4)'
             strokeWidth='1'
             pathLength='1'
             strokeDasharray='1'

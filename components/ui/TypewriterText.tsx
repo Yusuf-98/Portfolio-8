@@ -13,20 +13,13 @@ import { cn } from '@/lib/utils';
 // --- TypewriterText component ---
 interface TypewriterTextProps {
   text: string;
-  /** Tag HTML yang dirender, default 'p' */
   tag?: ElementType;
-  /** Kecepatan ketik per karakter (ms), default 65 */
   speed?: number;
-  /** Delay sebelum mulai setelah masuk viewport (ms), default 0 */
   delay?: number;
-  /** Threshold viewport sebelum animasi mulai (0-1), default 0.5 */
   threshold?: number;
-  /** Hanya animasi sekali, tidak repeat saat scroll ulang, default true */
   once?: boolean;
   className?: string;
-  /** Warna cursor, default warna text yang dipakai */
   cursorColor?: string;
-  /** Tampilkan cursor saat mengetik, default true */
   showCursor?: boolean;
 }
 

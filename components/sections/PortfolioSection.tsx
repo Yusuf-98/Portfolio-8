@@ -61,17 +61,20 @@ const portfolioData = [
 // --- Portfolio Section ---
 export default function PortfolioSection() {
   return (
-    <section className='relative w-full max-w-360 mx-auto bg-base-black py-10 md:py-20'>
+    <section
+      id='portfolio'
+      className='relative w-full max-w-360 mx-auto bg-base-black py-10 md:py-20 z-20'
+    >
       {/* BoxPattern kanan atas — mobile only */}
       <BoxPattern
         rotate={270}
-        className='md:hidden top-0'
+        className='absolute md:hidden'
         style={{ right: 0, top: '-21.62px' }}
       />
 
       <Container>
         {/* --- Portfolio Header --- */}
-        <div className='flex flex-col items-center gap-2 mb-8 md:mb-16'>
+        <div className='flex flex-col items-center gap-2 mb-6 md:mb-16'>
           {/* Section label */}
           <motion.span
             variants={fadeInUp}
@@ -79,7 +82,7 @@ export default function PortfolioSection() {
             whileInView='visible'
             viewport={{ once: true, amount: 0.2 }}
             transition={transitionDelayed(0)}
-            className='text-md font-medium text-primary-200 md:text-lg'
+            className='text-md font-medium text-primary-200 md:text-sec-label'
           >
             PORTFOLIO
           </motion.span>
@@ -91,7 +94,7 @@ export default function PortfolioSection() {
             whileInView='visible'
             viewport={{ once: true, amount: 0.2 }}
             transition={transitionDelayed(0.15)}
-            className='text-display-md tracking-t-none font-extrabold text-neutral-25 text-center md:text-display-2xl'
+            className='text-display-md tracking-t-none font-extrabold text-neutral-25 text-center md:text-sec-title'
           >
             SELECTED WORK
           </motion.h2>
@@ -127,7 +130,7 @@ export default function PortfolioSection() {
                       whileInView='visible'
                       viewport={{ once: true, amount: 0.2 }}
                       transition={transitionDelayed(0.6)}
-                      className='flex items-center justify-center w-[100px] h-[100px] rounded-full bg-neutral-25'
+                      className='flex items-center justify-center w-25 h-25 rounded-full bg-neutral-25 cursor-pointer'
                       style={{
                         boxShadow:
                           '0 8px 24px 0 rgba(0,0,0,0.35), 0 2px 6px 0 rgba(0,0,0,0.2)',

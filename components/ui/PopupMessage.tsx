@@ -63,20 +63,20 @@ export function PopupMessage({ type, isOpen, onClose }: PopupMessageProps) {
         >
           {/* Card */}
           <motion.div
-            className='relative flex flex-col items-center w-[361px] md:w-[479px] bg-base-black border border-neutral-800 rounded-2xl pt-20 px-6 pb-6 md:px-8 md:pb-8 gap-6'
+            className='relative flex flex-col items-center w-90.25 md:w-119.75 bg-base-black border border-neutral-800 rounded-2xl pt-20 px-6 pb-6 md:px-8 md:pb-8 gap-6'
             initial={{ opacity: 0, scale: 0.92, y: 24 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.92, y: 24 }}
             transition={{ duration: 0.25, ease: 'easeOut' }}
           >
             {/* Logo */}
-            <div className='absolute left-1/2 -translate-x-1/2 -top-[67px] md:-top-[80px]'>
+            <div className='absolute left-1/2 -translate-x-1/2 -top-16.75 md:top-[-80px]'>
               <Image
                 src={logo}
                 alt={type === 'success' ? 'Success' : 'Failed'}
                 width={148}
                 height={136}
-                className='w-[120px] h-[110px] md:w-[148px] md:h-[136px] object-contain'
+                className='w-30 h-27.5 md:w-37 md:h-34 object-contain'
               />
             </div>
 

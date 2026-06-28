@@ -4,21 +4,13 @@ import { useEffect, useRef, useState } from 'react';
 
 // --- useTypewriter hook ---
 interface UseTypewriterOptions {
-  /** Teks yang akan diketik */
   text: string;
-  /** Delay sebelum mulai mengetik (ms) */
   startDelay?: number;
-  /** Kecepatan mengetik per karakter (ms) */
   typeSpeed?: number;
-  /** Kecepatan hapus per karakter (ms) */
   deleteSpeed?: number;
-  /** Jeda setelah selesai mengetik sebelum hapus (ms) */
   pauseAfterType?: number;
-  /** Jeda setelah selesai hapus sebelum ketik lagi (ms) */
   pauseAfterDelete?: number;
-  /** Apakah loop (hapus lalu ketik ulang) */
   loop?: boolean;
-  /** Callback dipanggil saat teks selesai diketik penuh */
   onComplete?: () => void;
 }
 
@@ -90,7 +82,7 @@ export function useTypewriter({
         }
       }
 
-      // Variasi kecepatan natural: sesekali sedikit lebih lambat
+      // Variasi kecepatan natural
       const jitter = Math.random() * 40 - 20;
       const speed = isDeleting ? deleteSpeed : typeSpeed;
       timerRef.current = setTimeout(tick, speed + jitter);
@@ -115,7 +107,6 @@ export function useTypewriter({
 }
 
 // --- useTypewriterSequence hook ---
-// Untuk loop beberapa kata bergantian (hanya bagian suffix yang berubah)
 interface UseTypewriterSequenceOptions {
   words: string[];
   startDelay?: number;

@@ -17,11 +17,35 @@ const NAV_LINKS = [
   { label: 'Contact', href: '#contact' },
 ];
 
+// --- Logo text split ---
+const LOGO_TEXT = 'Edwin Anderson.';
+const LOGO_LETTERS = LOGO_TEXT.split('');
+
+// --- Logo letter component ---
+function LogoLetters({ className }: { className?: string }) {
+  return (
+    <span
+      className={`overflow-hidden inline-flex leading-none ${className ?? ''}`}
+      style={{ textShadow: '0 2.2ex 0 #91FF02', height: '1.2em' }}
+    >
+      {LOGO_LETTERS.map((char, i) => (
+        <span
+          key={i}
+          className='logo-letter relative inline-block transition-transform duration-500 ease-in-out'
+          style={{ transitionDelay: `${i * 0.05}s` }}
+        >
+          {char === ' ' ? '\u00A0' : char}
+        </span>
+      ))}
+    </span>
+  );
+}
+
 export function Navbar() {
   const [open, setOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
-  // --- Detect scroll to toggle navbar background ---
+  // --- Deteksi scroll ke toggle navbar background ---
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 8);
@@ -31,7 +55,7 @@ export function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // --- Auto-close mobile menu when screen reaches md breakpoint ---
+  // --- Auto-close mobile menu saat tercapai md ---
   useEffect(() => {
     const mediaQuery = window.matchMedia('(min-width: 768px)');
 
@@ -57,12 +81,10 @@ export function Navbar() {
             {/* --- Logo --- */}
             <Link
               href='#hero'
-              className='flex w-full items-center gap-2.25 lg:gap-2'
+              className='logo-link flex w-full items-center gap-2.25 lg:gap-2'
             >
               <span className='h-0 border w-6 border-base-white lg:w-10' />
-              <span className='w-full text-md font-bold text-primary-200 lg:text-xl lg:p-2'>
-                Edwin Anderson.
-              </span>
+              <LogoLetters className='text-md font-bold text-primary-200 lg:text-xl lg:pb-2 lg:pt-1.25' />
             </Link>
           </div>
 
@@ -90,7 +112,7 @@ export function Navbar() {
               <button
                 type='button'
                 aria-label='Open menu'
-                className='flex h-8 w-8 items-center justify-center md:hidden'
+                className='flex h-8 w-8 items-center justify-center cursor-pointer md:hidden'
               >
                 <Image
                   src='/icons/menu-04.png'
@@ -128,16 +150,22 @@ export function Navbar() {
                       }}
                       onClick={() => setOpen(false)}
                     >
-                      <div className='flex items-center justify-between '>
-                        <Dialog.Title className='flex items-center gap-2 text-md font-bold text-primary-200'>
-                          <span className='h-px w-6 bg-base-white' />
-                          Edwin Anderson.
+                      <div className='flex items-center justify-between'>
+                        <Dialog.Title asChild>
+                          <Link
+                            href='#hero'
+                            onClick={() => setOpen(false)}
+                            className='group flex items-center gap-2 [&:hover_span>span]:[-translate-y-[2.2ex]]'
+                          >
+                            <span className='h-px w-6 bg-base-white' />
+                            <LogoLetters className='text-md font-bold text-primary-200' />
+                          </Link>
                         </Dialog.Title>
                         <Dialog.Close asChild>
                           <button
                             type='button'
                             aria-label='Close menu'
-                            className='flex h-6 w-6 items-center justify-center'
+                            className='flex h-6 w-6 items-center justify-center cursor-pointer'
                           >
                             <Image
                               src='/icons/close.png'

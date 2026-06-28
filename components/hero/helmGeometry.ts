@@ -1,8 +1,4 @@
-// --- Helm wireframe geometry (sketsa-25) ---
-// Kubah egg membungkus kepala foto desktop seperti helm. Ubun-ubun bulat, terlebar di
-// ring ke-6, bawah membungkus rahang sampai bawah dagu. 11 latitude, 15 meridian
-// (non-uniform), outline kontur kiri-kanan tersambung jadi rim U kontinu di bawah.
-// Coordinate space: 672x896. cx=351.
+// --- Helm wireframe geometry ---
 
 export const HELM_VIEWBOX = { width: 672, height: 896 };
 

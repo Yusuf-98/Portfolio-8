@@ -12,6 +12,7 @@ import {
 import Image from 'next/image';
 import { Container } from '@/components/layout/Container';
 import { BoxPattern } from '@/components/ui/BoxPattern';
+import { FloatingBoat } from '@/lib/animations/floating-boat';
 
 // --- Delay urutan muncul ---
 const D_LABEL = 0.0;
@@ -25,8 +26,11 @@ const D_IMG_3 = 1.2;
 // --- About section ---
 export function About() {
   return (
-    <section className='relative w-full max-w-360 mx-auto bg-base-black md:pb-[120px]'>
-      {/* Box pattern decoration */}
+    <section
+      id='about'
+      className='relative w-full max-w-360 mx-auto bg-base-black md:pb-30'
+    >
+      {/* Box pattern */}
       <motion.div
         variants={fadeInDown}
         initial='hidden'
@@ -82,76 +86,76 @@ export function About() {
               </motion.h2>
 
               {/* Image 1 - desktop only */}
-              <motion.div
-                variants={fadeInLeft}
-                initial='hidden'
-                whileInView='visible'
-                viewport={{ once: true, amount: 0.2 }}
-                transition={transitionXDelayed(D_IMG_1)}
+              <FloatingBoat
+                index={0}
                 className='absolute hidden md:block z-0'
-                style={{
-                  left: '10.47%',
-                  top: '-71.20%',
-                  width: '20.10%',
-                }}
+                style={{ left: '10.47%', top: '-71.20%', width: '20.10%' }}
               >
-                <Image
-                  src='/images/image-01d.png'
-                  alt=''
-                  width={238}
-                  height={178}
-                  className='w-full h-auto'
-                  sizes='20vw'
-                />
-              </motion.div>
+                <motion.div
+                  variants={fadeInLeft}
+                  initial='hidden'
+                  whileInView='visible'
+                  viewport={{ once: true, amount: 0.2 }}
+                  transition={transitionXDelayed(D_IMG_1)}
+                >
+                  <Image
+                    src='/images/image-01d.png'
+                    alt=''
+                    width={238}
+                    height={178}
+                    className='w-full h-auto'
+                    sizes='20vw'
+                  />
+                </motion.div>
+              </FloatingBoat>
 
               {/* Image 2 - desktop only */}
-              <motion.div
-                variants={fadeInRight}
-                initial='hidden'
-                whileInView='visible'
-                viewport={{ once: true, amount: 0.2 }}
-                transition={transitionXDelayed(D_IMG_2)}
+              <FloatingBoat
+                index={1}
                 className='absolute hidden md:block z-1'
-                style={{
-                  left: '74.66%',
-                  top: '-51.09%',
-                  width: '21.11%',
-                }}
+                style={{ left: '74.66%', top: '-51.09%', width: '21.11%' }}
               >
-                <Image
-                  src='/images/image-02d.png'
-                  alt=''
-                  width={250}
-                  height={187}
-                  className='w-full h-auto'
-                  sizes='21vw'
-                />
-              </motion.div>
+                <motion.div
+                  variants={fadeInRight}
+                  initial='hidden'
+                  whileInView='visible'
+                  viewport={{ once: true, amount: 0.2 }}
+                  transition={transitionXDelayed(D_IMG_2)}
+                >
+                  <Image
+                    src='/images/image-02d.png'
+                    alt=''
+                    width={250}
+                    height={187}
+                    className='w-full h-auto'
+                    sizes='21vw'
+                  />
+                </motion.div>
+              </FloatingBoat>
 
               {/* Image 3 - desktop only */}
-              <motion.div
-                variants={fadeInUp}
-                initial='hidden'
-                whileInView='visible'
-                viewport={{ once: true, amount: 0.2 }}
-                transition={transitionDelayed(D_IMG_3)}
+              <FloatingBoat
+                index={2}
                 className='absolute hidden md:block z-4'
-                style={{
-                  left: '63.18%',
-                  top: '73.37%',
-                  width: '9.88%',
-                }}
+                style={{ left: '63.18%', top: '73.37%', width: '9.88%' }}
               >
-                <Image
-                  src='/images/image-03d.png'
-                  alt=''
-                  width={117}
-                  height={88}
-                  className='w-full h-auto'
-                  sizes='10vw'
-                />
-              </motion.div>
+                <motion.div
+                  variants={fadeInUp}
+                  initial='hidden'
+                  whileInView='visible'
+                  viewport={{ once: true, amount: 0.2 }}
+                  transition={transitionDelayed(D_IMG_3)}
+                >
+                  <Image
+                    src='/images/image-03d.png'
+                    alt=''
+                    width={117}
+                    height={88}
+                    className='w-full h-auto'
+                    sizes='10vw'
+                  />
+                </motion.div>
+              </FloatingBoat>
             </div>
           </div>
 
@@ -162,7 +166,7 @@ export function About() {
             whileInView='visible'
             viewport={{ once: true, amount: 0.2 }}
             transition={transitionDelayed(D_TEXT)}
-            className='text-md md:text-sec-body font-medium tracking-t-none text-neutral-400 text-center w-full md:max-w-[996px]'
+            className='text-md md:text-sec-body font-medium tracking-t-none text-neutral-400 text-center w-full md:max-w-249'
           >
             I love turning designs into interactive, high-performance websites.
             With a keen eye for detail and a deep understanding of frontend
@@ -170,62 +174,76 @@ export function About() {
             experiences.
           </motion.p>
 
-          {/* Mobile image collage */}
-          <div className='relative w-full aspect-[393/288] md:hidden'>
-            <motion.div
-              variants={fadeInLeft}
-              initial='hidden'
-              whileInView='visible'
-              viewport={{ once: true, amount: 0.2 }}
-              transition={transitionXDelayed(D_IMG_1)}
+          {/* Mobile image */}
+          <div className='relative w-full aspect-393/288 md:hidden'>
+            <FloatingBoat
+              index={0}
               style={{ left: '10.18%', top: '0%', width: '43.26%' }}
               className='absolute'
             >
-              <Image
-                src='/images/image-01d.png'
-                alt=''
-                width={170}
-                height={127}
-                className='w-full h-auto'
-                sizes='43vw'
-              />
-            </motion.div>
-            <motion.div
-              variants={fadeInRight}
-              initial='hidden'
-              whileInView='visible'
-              viewport={{ once: true, amount: 0.2 }}
-              transition={transitionXDelayed(D_IMG_2)}
+              <motion.div
+                variants={fadeInLeft}
+                initial='hidden'
+                whileInView='visible'
+                viewport={{ once: true, amount: 0.2 }}
+                transition={transitionXDelayed(D_IMG_1)}
+              >
+                <Image
+                  src='/images/image-01d.png'
+                  alt=''
+                  width={170}
+                  height={127}
+                  className='w-full h-auto'
+                  sizes='43vw'
+                />
+              </motion.div>
+            </FloatingBoat>
+
+            <FloatingBoat
+              index={1}
               style={{ left: '57.00%', top: '15.63%', width: '34.10%' }}
               className='absolute'
             >
-              <Image
-                src='/images/image-02d.png'
-                alt=''
-                width={134}
-                height={99}
-                className='w-full h-auto'
-                sizes='34vw'
-              />
-            </motion.div>
-            <motion.div
-              variants={fadeInUp}
-              initial='hidden'
-              whileInView='visible'
-              viewport={{ once: true, amount: 0.2 }}
-              transition={transitionDelayed(D_IMG_3)}
+              <motion.div
+                variants={fadeInRight}
+                initial='hidden'
+                whileInView='visible'
+                viewport={{ once: true, amount: 0.2 }}
+                transition={transitionXDelayed(D_IMG_2)}
+              >
+                <Image
+                  src='/images/image-02d.png'
+                  alt=''
+                  width={134}
+                  height={99}
+                  className='w-full h-auto'
+                  sizes='34vw'
+                />
+              </motion.div>
+            </FloatingBoat>
+
+            <FloatingBoat
+              index={2}
               style={{ left: '36.64%', top: '56.94%', width: '33.59%' }}
               className='absolute'
             >
-              <Image
-                src='/images/image-03d.png'
-                alt=''
-                width={132}
-                height={100}
-                className='w-full h-auto'
-                sizes='34vw'
-              />
-            </motion.div>
+              <motion.div
+                variants={fadeInUp}
+                initial='hidden'
+                whileInView='visible'
+                viewport={{ once: true, amount: 0.2 }}
+                transition={transitionDelayed(D_IMG_3)}
+              >
+                <Image
+                  src='/images/image-03d.png'
+                  alt=''
+                  width={132}
+                  height={100}
+                  className='w-full h-auto'
+                  sizes='34vw'
+                />
+              </motion.div>
+            </FloatingBoat>
           </div>
         </div>
       </Container>

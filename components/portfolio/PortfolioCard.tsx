@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import { motion } from 'framer-motion';
-import { fadeInUp, transitionDelayed } from '@/lib/animations/staggered-item';
+import { transitionDelayed } from '@/lib/animations/staggered-item';
 
 // --- Card hover variants ---
 const cardVariants = {
@@ -39,7 +39,7 @@ export default function PortfolioCard({
       whileHover='hover'
       viewport={{ once: true, amount: 0.2 }}
       transition={transitionDelayed(index * 0.15)}
-      className='flex flex-col gap-3 md:gap-4 w-full cursor-pointer'
+      className='flex flex-col gap-3 md:gap-sec-card-title w-full cursor-pointer'
     >
       {/* Image */}
       <div
@@ -59,23 +59,13 @@ export default function PortfolioCard({
       <motion.h3
         variants={titleVariants}
         transition={{ duration: 0.2 }}
-        className='
-          font-bold
-          text-xl md:text-display-xs
-          leading-[34px] md:leading-[36px]
-        '
+        className='font-bold text-xl md:text-sec-card-title'
       >
         {title}
       </motion.h3>
 
       {/* Description */}
-      <p
-        className='
-          font-normal text-neutral-400
-          text-sm md:text-md
-          leading-[28px] md:leading-[30px]
-        '
-      >
+      <p className='font-normal text-neutral-400 text-sm md:text-body-responsive'>
         {description}
       </p>
     </motion.div>

@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { BoxPattern } from '@/components/ui/BoxPattern';
 import { Button } from '@/components/ui/Button';
@@ -17,9 +18,21 @@ import {
 
 // --- Social media data ---
 const socialMedia = [
-  { icon: '/icons/dribbble.png', alt: 'Dribbble', href: '#' },
-  { icon: '/icons/instagram.png', alt: 'Instagram', href: '#' },
-  { icon: '/icons/linkedin.png', alt: 'LinkedIn', href: '#' },
+  {
+    icon: '/icons/dribbble.png',
+    alt: 'Dribbble',
+    href: 'https://dribbble.com/',
+  },
+  {
+    icon: '/icons/instagram.png',
+    alt: 'Instagram',
+    href: 'https://www.instagram.com/',
+  },
+  {
+    icon: '/icons/linkedin.png',
+    alt: 'LinkedIn',
+    href: 'https://id.linkedin.com/',
+  },
 ];
 
 const CONTACT_W = 660;
@@ -99,7 +112,10 @@ export default function ContactSection() {
   };
 
   return (
-    <section className='relative w-full max-w-360 mx-auto border-t border-neutral-800 bg-base-black pb-[120px] z-0'>
+    <section
+      id='contact'
+      className='relative w-full max-w-360 mx-auto border-t border-neutral-800 bg-base-black md:pt-20 pb-30 z-20'
+    >
       {/* BoxPattern kiri atas */}
       <motion.div
         variants={fadeInUp}
@@ -206,13 +222,15 @@ export default function ContactSection() {
                   <a
                     key={item.alt}
                     href={item.href}
-                    className='flex items-center justify-center w-12 h-12 lg:w-16 lg:h-16 rounded-full bg-base-black border border-neutral-800'
+                    className='flex items-center justify-center w-12 h-12 lg:w-16 lg:h-16 rounded-full bg-base-black border border-neutral-800 transition-transform duration-500 hover-scale'
                   >
                     <div className='relative w-8 h-8 lg:w-9.5 lg:h-9.5'>
-                      <img
+                      <Image
                         src={item.icon}
                         alt={item.alt}
-                        className='w-full h-full object-contain'
+                        fill
+                        sizes='(min-width: 1024px) 38px, 32px'
+                        className='object-contain'
                       />
                     </div>
                   </a>
@@ -251,7 +269,7 @@ export default function ContactSection() {
                 whileInView='visible'
                 viewport={{ once: true, amount: 0.2 }}
                 transition={transitionDelayed(0)}
-                className='text-md font-medium text-primary-200 lg:text-lg'
+                className='text-md font-medium text-primary-200 lg:text-sec-label'
               >
                 CONTACT
               </motion.span>
@@ -261,8 +279,7 @@ export default function ContactSection() {
                 whileInView='visible'
                 viewport={{ once: true, amount: 0.2 }}
                 transition={transitionDelayed(0.15)}
-                className='font-extrabold text-neutral-25 text-center lg:text-left'
-                style={{ fontSize: 'clamp(2rem, 3.33vw, 3rem)' }}
+                className='font-extrabold text-neutral-25 text-center lg:text-left lg:text-sec-title'
               >
                 LET&apos;S GET IN TOUCH
               </motion.h2>
@@ -326,7 +343,10 @@ export default function ContactSection() {
                 viewport={{ once: true, amount: 0.2 }}
                 transition={transitionDelayed(0.75)}
               >
-                <Button className='w-full' onClick={handleSubmit}>
+                <Button
+                  className='w-full cursor-pointer'
+                  onClick={handleSubmit}
+                >
                   Send Message
                 </Button>
               </motion.div>

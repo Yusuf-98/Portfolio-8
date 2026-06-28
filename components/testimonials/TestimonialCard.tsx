@@ -24,7 +24,7 @@ export default function TestimonialCard({
   return (
     <div
       className='
-      relative flex flex-col gap-3
+      relative flex flex-col gap-3 md:gap-sec-card-title
       w-full h-full
       border border-neutral-800
       rounded-2xl md:rounded-[20px]
@@ -34,23 +34,23 @@ export default function TestimonialCard({
       {/* Corner glow */}
       <CornerGlow delay={index * 1.5} />
 
-      {/* Card header: nama + role kiri, logo kanan */}
+      {/* Card header */}
       <div className='flex flex-row items-center justify-between gap-4 w-full'>
         {/* Nama dan role */}
         <div className='flex flex-col gap-1'>
           {/* Nama */}
-          <span className='text-lg font-bold text-neutral-25 md:text-xl'>
+          <span className='text-lg font-bold text-neutral-25 md:text-sec-card-title'>
             {name}
           </span>
 
           {/* Role */}
-          <span className='text-md font-normal text-neutral-400 md:text-lg md:font-medium'>
+          <span className='text-md font-normal text-neutral-400 md:text-body-responsive'>
             {role}
           </span>
         </div>
 
         {/* Company logo */}
-        <div className='relative shrink-0 w-[76px] h-8 md:w-[114px] md:h-12'>
+        <div className='relative shrink-0 w-19 h-8 md:w-28.5 md:h-12'>
           <Image
             src={logo}
             alt={logoAlt}
@@ -77,7 +77,7 @@ export default function TestimonialCard({
       </div>
 
       {/* Quote */}
-      <p className='text-md font-medium text-neutral-25 leading-[30px] md:text-lg md:leading-[32px]'>
+      <p className='text-md font-medium text-neutral-25 md:text-body-responsive'>
         {quote}
       </p>
     </div>
