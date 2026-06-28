@@ -20,7 +20,7 @@ const getCardVariants = (direction: 'left' | 'right' | 'up') => {
 
 const answerVariants = {
   hidden: { opacity: 0 },
-  visible: { opacity: 0 },
+  visible: { opacity: 0.6 },
   hover: { opacity: 1 },
 };
 
