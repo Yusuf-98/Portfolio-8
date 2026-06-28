@@ -1,26 +1,347 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  /* --- Colors --- */
+  --color-neutral-25: #fdfdfd;
+  --color-neutral-50: #fafafa;
+  --color-neutral-100: #f5f5f5;
+  --color-neutral-200: #e9eaeb;
+  --color-neutral-300: #d5d7da;
+  --color-neutral-400: #a4a7ae;
+  --color-neutral-500: #717680;
+  --color-neutral-600: #535862;
+  --color-neutral-700: #414651;
+  --color-neutral-800: #252b37;
+  --color-neutral-900: #181d27;
+  --color-neutral-950: #0a0d12;
+
+  --color-primary-100: #daffab;
+  --color-primary-200: #91ff02;
+  --color-primary-300: #3a6601;
+  --color-primary-400: #1d3300;
+
+  --color-base-white: #ffffff;
+  --color-base-black: #000000;
+
+  /* --- Additional Colors --- */
+  --color-lemon-10: #f7ffd9;
+  --color-lemon-20: #f1ffbf;
+  --color-lemon-30: #eaffa0;
+  --color-lemon-40: #e3ff80;
+  --color-lemon-50: #dcff60;
+  --color-lemon-base: #d5ff40;
+  --color-lemon-60: #b2d535;
+  --color-lemon-70: #8eaa2b;
+  --color-lemon-80: #6b8020;
+  --color-lemon-90: #475515;
+  --color-lemon-100: #2b330d;
+
+  --color-lime-10: #e9ffcc;
+  --color-lime-20: #daffab;
+  --color-lime-30: #c8ff81;
+  --color-lime-40: #b6ff56;
+  --color-lime-50: #a3ff2c;
+  --color-lime-base: #91ff02;
+  --color-lime-60: #79d502;
+  --color-lime-70: #61aa01;
+  --color-lime-80: #498001;
+  --color-lime-90: #305501;
+  --color-lime-100: #1d3300;
+
+  /* --- Font family --- */
+  --font-display: var(--font-red-hat-display), sans-serif;
+
+  /* --- Typography scale --- */
+  --text-display-4xl: 80px;
+  --text-display-4xl--line-height: 80px;
+
+  --text-display-3xl: clamp(40px, 25.6px + 4.2vw, 60px);
+  --text-display-3xl--line-height: clamp(48px, 33.6px + 4.3vw, 72px);
+
+  --text-display-2xl-0: 48px;
+  --text-display-2xl-0--line-height: 60px;
+
+  --text-display-2xl: 48px;
+  --text-display-2xl--line-height: 60px;
+  --text-display-2xl--letter-spacing: -0.02em;
+
+  --text-display-xl: 40px;
+  --text-display-xl--line-height: 56px;
+  --text-display-xl--letter-spacing: -0.02em;
+
+  --text-display-lg: 36px;
+  --text-display-lg--line-height: 48px;
+  --text-display-lg--letter-spacing: -0.02em;
+
+  --text-display-md: 32px;
+  --text-display-md--line-height: 46px;
+
+  --text-display-sm: 28px;
+  --text-display-sm--line-height: 38px;
+
+  --text-display-xs: 24px;
+  --text-display-xs--line-height: 36px;
+
+  --text-xl: 20px;
+  --text-xl--line-height: 34px;
+
+  --text-lg: 18px;
+  --text-lg--line-height: 32px;
+
+  --text-md: 16px;
+  --text-md--line-height: 30px;
+
+  --text-sm: 14px;
+  --text-sm--line-height: 28px;
+
+  --text-xs: 12px;
+  --text-xs--line-height: 24px;
+
+  --text-display-hero: clamp(2.25rem, 1.218rem + 4.202vw, 5rem);
+  --text-display-hero--line-height: clamp(3rem, 6.76vw, 5rem);
+
+  /* --- Letter Spacing --- */
+  --tracking-t-none: 0em;
+  --tracking-t-2: -0.02em;
+  --tracking-t-3: -0.03em;
+
+  /* --- Spacing --- */
+  --spacing-xxs: 2px;
+  --spacing-xs: 4px;
+  --spacing-sm: 6px;
+  --spacing-md: 8px;
+  --spacing-lg: 12px;
+  --spacing-xl: 16px;
+  --spacing-2xl: 20px;
+  --spacing-3xl: 24px;
+  --spacing-4xl: 32px;
+  --spacing-5xl: 40px;
+  --spacing-6xl: 48px;
+  --spacing-7xl: 64px;
+  --spacing-8xl: 80px;
+  --spacing-9xl: 96px;
+  --spacing-10xl: 128px;
+  --spacing-11xl: 140px;
+
+  /* --- Responsive font size tokens --- */
+  --text-body-responsive: clamp(0.875rem, 0.732rem + 0.298vw, 1rem);
+  --text-body-responsive--line-height: clamp(
+    1.75rem,
+    1.464rem + 0.595vw,
+    1.875rem
+  );
+
+  --text-label-responsive: clamp(0.875rem, 0.589rem + 0.595vw, 1.125rem);
+  --text-label-responsive--line-height: clamp(
+    1.75rem,
+    1.107rem + 0.893vw,
+    2rem
+  );
+
+  --text-title-responsive: clamp(1rem, 0.429rem + 1.19vw, 1.5rem);
+  --text-title-responsive--line-height: clamp(
+    1.875rem,
+    0.982rem + 1.488vw,
+    2.25rem
+  );
+
+  /* --- Work card logo --- */
+  --work-logo-width: clamp(4.75rem, 2.036rem + 5.655vw, 7.125rem);
+  --work-logo-height: clamp(2rem, 0.857rem + 2.381vw, 3rem);
+
+  /* --- Responsive section typography --- */
+  --text-sec-label: clamp(1rem, 0.857rem + 0.298vw, 1.125rem);
+  --text-sec-label--line-height: clamp(1.875rem, 1.732rem + 0.298vw, 2rem);
+
+  --text-sec-title: clamp(2rem, 0.857rem + 2.381vw, 3rem);
+  --text-sec-title--line-height: clamp(2.875rem, 1.875rem + 2.083vw, 3.75rem);
+
+  --text-sec-body: clamp(1rem, 0.714rem + 0.595vw, 1.25rem);
+  --text-sec-body--line-height: clamp(1.875rem, 1.232rem + 1.131vw, 2.125rem);
+
+  --text-sec-card-title: clamp(1.25rem, 0.821rem + 0.893vw, 1.75rem);
+  --text-sec-card-title--line-height: clamp(
+    2.125rem,
+    1.839rem + 0.595vw,
+    2.375rem
+  );
+
+  /* --- Responsive section gap --- */
+  --gap-sec-card-title: clamp(0.75rem, 0.429rem + 1.013vw, 1.5rem);
+  --gap-sec-skill-bar: clamp(1rem, 0.812rem + 0.764vw, 1.5rem);
+  --gap-sec-skill-content: clamp(1.5rem, 0.702rem + 3.247vw, 3.625rem);
+
+  /* --- Shadow --- */
+  --shadow-glow-primary: 0px 4px 40px rgba(145, 255, 2, 0.4);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+/* --- Base styles --- */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  body {
+    @apply bg-base-black text-base-white font-display antialiased;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer utilities {
+  .hover-primary:hover {
+    color: var(--color-primary-200);
+  }
+
+  .hover-scale:hover {
+    transform: scale(1.3);
+  }
+
+  .text-sec-label {
+    font-size: var(--text-sec-label);
+    line-height: var(--text-sec-label--line-height);
+  }
+
+  .text-sec-title {
+    font-size: var(--text-sec-title);
+    line-height: var(--text-sec-title--line-height);
+  }
+
+  .text-sec-body {
+    font-size: var(--text-sec-body);
+    line-height: var(--text-sec-body--line-height);
+  }
+
+  .text-sec-card-title {
+    font-size: var(--text-sec-card-title);
+    line-height: var(--text-sec-card-title--line-height);
+  }
+
+  /* --- Gap --- */
+  .gap-sec-card-title {
+    gap: 0.75rem;
+  }
+}
+
+/* --- Animasi logo hover --- */
+.logo-link:hover .logo-letter {
+  transform: translateY(-2.2ex);
+}
+
+@media (min-width: 768px) {
+  .gap-sec-card-title {
+    gap: var(--gap-sec-card-title);
+  }
+}
+
+@media (min-width: 768px) {
+  .gap-sec-skill-bar {
+    gap: var(--gap-sec-skill-bar);
+  }
+}
+
+@media (min-width: 768px) {
+  .gap-sec-skill-content {
+    gap: var(--gap-sec-skill-content);
+  }
+}
+
+.text-body-responsive {
+  font-size: var(--text-body-responsive);
+  line-height: var(--text-body-responsive--line-height);
+}
+
+.text-label-responsive {
+  font-size: var(--text-label-responsive);
+  line-height: var(--text-label-responsive--line-height);
+}
+
+.text-title-responsive {
+  font-size: var(--text-title-responsive);
+  line-height: var(--text-title-responsive--line-height);
+}
+
+/* --- Cursor blink --- */
+.animate-blink {
+  animation: blink-cursor 0.7s step-end infinite;
+}
+
+.hover-text-primary-200 {
+  color: var(--color-primary-200);
+}
+
+/* --- Custom Container --- */
+@layer components {
+  .custom-container {
+    @apply max-w-360 min-w-98.25 mx-auto px-4 md:px-[clamp(1rem,8.89vw,8rem)];
+  }
+}
+
+/* --- Keyframes --- */
+@keyframes blink-cursor {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+@keyframes draw-border-path {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes shimmer-slide {
+  from {
+    transform: translateX(-100%) skewX(-15deg);
+  }
+  to {
+    transform: translateX(250%) skewX(-15deg);
+  }
+}
+
+@keyframes card-shimmer-slide {
+  from {
+    transform: translateX(-100%) translateY(-100%) skewX(-15deg);
+  }
+  to {
+    transform: translateX(200%) translateY(200%) skewX(-15deg);
+  }
+}
+
+/* --- Button shimmer --- */
+.shimmer-stripe {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.45) 50%,
+    transparent 100%
+  );
+  transform: translateX(-100%) skewX(-15deg);
+}
+
+.shimmer-run {
+  animation: shimmer-slide 0.75s ease 0s 1 forwards;
+}
+
+/* --- Card shimmer --- */
+.card-shimmer-stripe {
+  width: 60%;
+  height: 200%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    135deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.08) 50%,
+    transparent 100%
+  );
+  transform: translateX(-100%) translateY(-100%) skewX(-15deg);
+}
+
+.card-shimmer-run {
+  animation: card-shimmer-slide 0.9s ease 0s 1 forwards;
 }
