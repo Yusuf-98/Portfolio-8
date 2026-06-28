@@ -6,8 +6,12 @@ import Link from 'next/link';
 import { AnimatePresence, motion } from 'framer-motion';
 import * as Dialog from '@radix-ui/react-dialog';
 import { Container } from './Container';
+import {
+  fadeInUp,
+  fadeIn,
+  transitionDelayed,
+} from '@/lib/animations/staggered-item';
 
-// --- Nav Links Data ---
 const NAV_LINKS = [
   { label: 'Home', href: '#hero' },
   { label: 'About', href: '#about' },
@@ -17,11 +21,9 @@ const NAV_LINKS = [
   { label: 'Contact', href: '#contact' },
 ];
 
-// --- Logo text split ---
 const LOGO_TEXT = 'Edwin Anderson.';
 const LOGO_LETTERS = LOGO_TEXT.split('');
 
-// --- Logo letter component ---
 function LogoLetters({ className }: { className?: string }) {
   return (
     <span
@@ -45,56 +47,63 @@ export function Navbar() {
   const [open, setOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
-  // --- Deteksi scroll ke toggle navbar background ---
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 8);
-    };
+    const handleScroll = () => setIsScrolled(window.scrollY > 8);
     window.addEventListener('scroll', handleScroll);
     handleScroll();
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // --- Auto-close mobile menu saat tercapai md ---
   useEffect(() => {
     const mediaQuery = window.matchMedia('(min-width: 768px)');
-
     const handleChange = (e: MediaQueryListEvent) => {
-      if (e.matches) {
-        setOpen(false);
-      }
+      if (e.matches) setOpen(false);
     };
-
     mediaQuery.addEventListener('change', handleChange);
     return () => mediaQuery.removeEventListener('change', handleChange);
   }, []);
 
   return (
-    <header
-      className={`sticky top-0 z-50 w-full max-w-360 mx-auto transition-colors duration-300 border-b border-neutral-800  ${
-        isScrolled ? ' bg-base-black' : 'bg-transparent'
+    <motion.header
+      variants={fadeInUp}
+      initial='hidden'
+      animate='visible'
+      transition={transitionDelayed(0.3)}
+      className={`sticky top-0 z-50 w-full max-w-360 mx-auto transition-colors duration-300 border-b border-neutral-800 ${
+        isScrolled ? 'bg-base-black' : 'bg-transparent'
       }`}
     >
       <Container>
         <div className='flex h-20 items-center justify-between gap-4xl md:gap-sm lg:gap-4xl'>
           <div className='flex items-center w-full'>
             {/* --- Logo --- */}
-            <Link
-              href='#hero'
-              className='logo-link flex w-full items-center gap-2.25 lg:gap-2'
+            <motion.div
+              variants={fadeIn}
+              initial='hidden'
+              animate='visible'
+              transition={transitionDelayed(0.6)}
+              className='w-full'
             >
-              <span className='h-0 border w-6 border-base-white lg:w-10' />
-              <LogoLetters className='text-md font-bold text-primary-200 lg:text-xl lg:pb-2 lg:pt-1.25' />
-            </Link>
+              <Link
+                href='#hero'
+                className='logo-link flex w-full items-center gap-2.25 lg:gap-2'
+              >
+                <span className='h-0 border w-6 border-base-white lg:w-10' />
+                <LogoLetters className='text-md font-bold text-primary-200 lg:text-xl lg:pb-2 lg:pt-1.25' />
+              </Link>
+            </motion.div>
           </div>
 
           {/* --- Desktop Nav --- */}
           <nav className='hidden items-center justify-center gap-4xl md:gap-3xl lg:gap-4xl md:flex'>
-            {NAV_LINKS.map((link) => (
+            {NAV_LINKS.map((link, i) => (
               <motion.div
                 key={link.href}
+                variants={fadeIn}
+                initial='hidden'
+                animate='visible'
+                transition={transitionDelayed(1.5 + i * 0.1)}
                 whileHover={{ y: -2 }}
-                transition={{ type: 'spring', stiffness: 300 }}
               >
                 <Link
                   href={link.href}
@@ -155,7 +164,7 @@ export function Navbar() {
                           <Link
                             href='#hero'
                             onClick={() => setOpen(false)}
-                            className='group flex items-center gap-2 [&:hover_span>span]:[-translate-y-[2.2ex]]'
+                            className='group flex items-center gap-2'
                           >
                             <span className='h-px w-6 bg-base-white' />
                             <LogoLetters className='text-md font-bold text-primary-200' />
@@ -205,6 +214,6 @@ export function Navbar() {
           </Dialog.Root>
         </div>
       </Container>
-    </header>
+    </motion.header>
   );
 }
