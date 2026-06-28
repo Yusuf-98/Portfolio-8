@@ -67,6 +67,13 @@ const PHASES_MOBILE = {
   fill_b4: [0.964, 1.0],
 };
 
+type Phases = typeof PHASES_MOBILE;
+
+interface SegmentGeometry {
+  top: number;
+  height: number;
+}
+
 // --- Line segment ---
 interface LineSegmentProps {
   progress: MotionValue<number>;
@@ -100,21 +107,10 @@ function LineSegment({
   );
 }
 
-interface SegmentGeometry {
-  top: number;
-  height: number;
-}
-
-interface LineGeometry {
-  left: number;
-  top: number;
-  height: number;
-  segments: SegmentGeometry[];
-}
-
 // --- Work Timeline ---
 export default function WorkTimeline() {
   const containerRef = useRef<HTMLDivElement>(null);
+  const lineWrapperRef = useRef<HTMLDivElement>(null);
   const mobileBubbleRefs = useRef<(HTMLDivElement | null)[]>([
     null,
     null,
@@ -128,19 +124,18 @@ export default function WorkTimeline() {
     null,
   ]);
 
-  const [lineGeo, setLineGeo] = useState<LineGeometry | null>(null);
-  const [isMobile, setIsMobile] = useState(true);
+  const [phases, setPhases] = useState<Phases>(PHASES_MOBILE);
+  const [segments, setSegments] = useState<SegmentGeometry[]>([]);
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ['start 50%', 'end 50%'],
   });
 
-  const calculateGeometry = useCallback(() => {
-    if (!containerRef.current) return;
-    const containerRect = containerRef.current.getBoundingClientRect();
-    const isMobileNow = window.innerWidth < 768;
+  const updateLinePosition = useCallback(() => {
+    if (!containerRef.current || !lineWrapperRef.current) return;
 
+    const isMobileNow = window.innerWidth < 768;
     const activeRefs = isMobileNow
       ? mobileBubbleRefs.current
       : desktopBubbleRefs.current;
@@ -150,11 +145,11 @@ export default function WorkTimeline() {
     );
     if (bubbleRects.some((r) => r === null)) return;
 
-    // Center X bubble relatif terhadap container
+    const containerRect = containerRef.current.getBoundingClientRect();
+
     const bubbleCenterX =
       bubbleRects[0]!.left - containerRect.left + bubbleRects[0]!.width / 2;
 
-    // Center Y setiap bubble relatif terhadap container
     const centerYs = bubbleRects.map(
       (rect) => rect!.top - containerRect.top + rect!.height / 2
     );
@@ -163,6 +158,14 @@ export default function WorkTimeline() {
     const gBottom = centerYs[3];
     const gHeight = gBottom - gTop;
 
+    // Direct DOM update — bypass React render cycle
+    const el = lineWrapperRef.current;
+    el.style.left = `${bubbleCenterX}px`;
+    el.style.top = `${gTop}px`;
+    el.style.height = `${gHeight}px`;
+    el.style.display = gHeight > 0 ? 'block' : 'none';
+
+    // Segments hanya update via state (tidak perlu secepat posisi)
     const segs: SegmentGeometry[] = [];
     for (let i = 0; i < 3; i++) {
       const fromBottom = bubbleRects[i]!.bottom - containerRect.top - gTop;
@@ -170,71 +173,54 @@ export default function WorkTimeline() {
       segs.push({ top: fromBottom, height: toTop - fromBottom });
     }
 
-    setLineGeo({
-      left: bubbleCenterX,
-      top: gTop,
-      height: gHeight,
-      segments: segs,
-    });
+    const newPhases = isMobileNow ? PHASES_MOBILE : PHASES_DESKTOP;
+    setPhases(newPhases);
+    setSegments(segs);
   }, []);
 
   useEffect(() => {
-    const checkBreakpoint = () => setIsMobile(window.innerWidth < 768);
-    checkBreakpoint();
-    window.addEventListener('resize', checkBreakpoint);
-    return () => window.removeEventListener('resize', checkBreakpoint);
-  }, []);
-
-  useEffect(() => {
-    calculateGeometry();
-  }, [isMobile, calculateGeometry]);
-
-  useEffect(() => {
-    calculateGeometry();
-    const observer = new ResizeObserver(calculateGeometry);
+    updateLinePosition();
+    window.addEventListener('resize', updateLinePosition);
+    const observer = new ResizeObserver(updateLinePosition);
     if (containerRef.current) observer.observe(containerRef.current);
-    return () => observer.disconnect();
-  }, [calculateGeometry]);
-
-  const PHASES = isMobile ? PHASES_MOBILE : PHASES_DESKTOP;
+    return () => {
+      window.removeEventListener('resize', updateLinePosition);
+      observer.disconnect();
+    };
+  }, [updateLinePosition]);
 
   const segmentPhases = [
-    { start: PHASES.garis_12[0], end: PHASES.garis_12[1] },
-    { start: PHASES.garis_23[0], end: PHASES.garis_23[1] },
-    { start: PHASES.garis_34[0], end: PHASES.garis_34[1] },
+    { start: phases.garis_12[0], end: phases.garis_12[1] },
+    { start: phases.garis_23[0], end: phases.garis_23[1] },
+    { start: phases.garis_34[0], end: phases.garis_34[1] },
   ];
 
   return (
     <div ref={containerRef} className='relative w-full'>
-      {/* --- Garis: posisi dari bubble aktual --- */}
-      {lineGeo && lineGeo.height > 0 && (
-        <div
-          className='absolute w-px pointer-events-none z-0 -translate-x-1/2'
-          style={{
-            left: lineGeo.left,
-            top: lineGeo.top,
-            height: lineGeo.height,
-          }}
-        >
-          <div className='absolute inset-0 bg-neutral-800' />
-          {lineGeo.segments.map((seg, i) => (
-            <LineSegment
-              key={i}
-              progress={scrollYProgress}
-              phaseStart={segmentPhases[i].start}
-              phaseEnd={segmentPhases[i].end}
-              top={seg.top}
-              height={seg.height}
-            />
-          ))}
-        </div>
-      )}
+      {/* --- Garis: direct DOM position --- */}
+      <div
+        ref={lineWrapperRef}
+        className='absolute w-px pointer-events-none z-0 -translate-x-1/2'
+        style={{ display: 'none' }}
+      >
+        <div className='absolute inset-0 bg-neutral-800' />
+        {segments.map((seg, i) => (
+          <LineSegment
+            key={i}
+            progress={scrollYProgress}
+            phaseStart={segmentPhases[i].start}
+            phaseEnd={segmentPhases[i].end}
+            top={seg.top}
+            height={seg.height}
+          />
+        ))}
+      </div>
 
       {/* --- Work items --- */}
       <div className='flex flex-col gap-4 md:gap-0'>
         {workData.map((item, index) => {
           const isEven = index % 2 === 1;
-          const fillPhaseKey = `fill_b${item.id}` as keyof typeof PHASES;
+          const fillPhaseKey = `fill_b${item.id}` as keyof Phases;
 
           return (
             <div
@@ -249,8 +235,8 @@ export default function WorkTimeline() {
                   }}
                   number={item.id}
                   progress={scrollYProgress}
-                  phaseStart={PHASES[fillPhaseKey][0]}
-                  phaseEnd={PHASES[fillPhaseKey][1]}
+                  phaseStart={phases[fillPhaseKey][0]}
+                  phaseEnd={phases[fillPhaseKey][1]}
                 />
               </div>
               <div className='md:hidden flex-1'>
@@ -260,19 +246,12 @@ export default function WorkTimeline() {
                   description={item.description}
                   logo={item.logo}
                   logoAlt={item.logoAlt}
+                  index={index}
                 />
               </div>
 
               {/* --- Desktop --- */}
-              {/* Sisi kiri: w-[calc(50%-54px)] md / w-[calc(50%-88px)] lg */}
-              <div
-                className={`
-                hidden md:block
-                w-[calc(50%-54px)] lg:w-[calc(50%-88px)]
-                shrink-0
-              `}
-              >
-                {/* Card untuk item genap (2 & 4) */}
+              <div className='hidden md:block w-[calc(50%-54px)] lg:w-[calc(50%-88px)] shrink-0'>
                 {isEven && (
                   <WorkCard
                     year={item.year}
@@ -280,6 +259,7 @@ export default function WorkTimeline() {
                     description={item.description}
                     logo={item.logo}
                     logoAlt={item.logoAlt}
+                    index={index}
                   />
                 )}
               </div>
@@ -295,23 +275,15 @@ export default function WorkTimeline() {
                   }}
                   number={item.id}
                   progress={scrollYProgress}
-                  phaseStart={PHASES[fillPhaseKey][0]}
-                  phaseEnd={PHASES[fillPhaseKey][1]}
+                  phaseStart={phases[fillPhaseKey][0]}
+                  phaseEnd={phases[fillPhaseKey][1]}
                 />
               </div>
 
               {/* Spacer kanan */}
               <div className='hidden md:block w-[30px] lg:w-16 shrink-0' />
 
-              {/* Sisi kanan: w-[calc(50%-54px)] md / w-[calc(50%-88px)] lg */}
-              <div
-                className={`
-                hidden md:block
-                w-[calc(50%-54px)] lg:w-[calc(50%-88px)]
-                shrink-0
-              `}
-              >
-                {/* Card untuk item ganjil (1 & 3) */}
+              <div className='hidden md:block w-[calc(50%-54px)] lg:w-[calc(50%-88px)] shrink-0'>
                 {!isEven && (
                   <WorkCard
                     year={item.year}
@@ -319,6 +291,7 @@ export default function WorkTimeline() {
                     description={item.description}
                     logo={item.logo}
                     logoAlt={item.logoAlt}
+                    index={index}
                   />
                 )}
               </div>

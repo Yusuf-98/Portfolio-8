@@ -58,6 +58,9 @@
   --text-display-3xl: clamp(40px, 25.6px + 4.2vw, 60px);
   --text-display-3xl--line-height: clamp(48px, 33.6px + 4.3vw, 72px);
 
+  --text-display-2xl-0: 48px;
+  --text-display-2xl-0--line-height: 60px;
+
   --text-display-2xl: 48px;
   --text-display-2xl--line-height: 60px;
   --text-display-2xl--letter-spacing: -0.02em;
@@ -121,24 +124,46 @@
   --spacing-11xl: 140px;
 
   /* --- Responsive font size tokens --- */
-  /* body-responsive: 14px → 16px */
-  --text-body-responsive: clamp(0.88rem, 1.11vw, 1rem);
-  --text-body-responsive--line-height: clamp(1.75rem, 2.08vw, 1.88rem);
+  --text-body-responsive: clamp(0.875rem, 0.732rem + 0.298vw, 1rem);
+  --text-body-responsive--line-height: clamp(
+    1.75rem,
+    1.464rem + 0.595vw,
+    1.875rem
+  );
 
-  /* label-responsive: 14px → 18px */
-  --text-label-responsive: clamp(0.88rem, 1.25vw, 1.13rem);
-  --text-label-responsive--line-height: clamp(1.75rem, 2.22vw, 2rem);
+  --text-label-responsive: clamp(0.875rem, 0.589rem + 0.595vw, 1.125rem);
+  --text-label-responsive--line-height: clamp(
+    1.75rem,
+    1.107rem + 0.893vw,
+    2rem
+  );
 
-  /* title-responsive: 16px → 24px */
-  --text-title-responsive: clamp(1rem, 1.67vw, 1.5rem);
-  --text-title-responsive--line-height: clamp(1.88rem, 2.5vw, 2.25rem);
+  --text-title-responsive: clamp(1rem, 0.429rem + 1.19vw, 1.5rem);
+  --text-title-responsive--line-height: clamp(
+    1.875rem,
+    0.982rem + 1.488vw,
+    2.25rem
+  );
 
   /* --- Work card logo --- */
-  --work-logo-width: clamp(4.75rem, 7.92vw, 7.13rem);
-  --work-logo-height: clamp(2rem, 3.33vw, 3rem);
+  --work-logo-width: clamp(4.75rem, 2.036rem + 5.655vw, 7.125rem);
+  --work-logo-height: clamp(2rem, 0.857rem + 2.381vw, 3rem);
+
+  /* --- Responsive section typography --- */
+  --text-sec-label: clamp(1rem, 0.857rem + 0.298vw, 1.125rem);
+  --text-sec-label--line-height: clamp(1.875rem, 1.732rem + 0.298vw, 2rem);
+
+  --text-sec-title: clamp(2rem, 0.857rem + 2.381vw, 3rem);
+  --text-sec-title--line-height: clamp(2.875rem, 1.875rem + 2.083vw, 3.75rem);
+
+  --text-sec-body: clamp(1rem, 0.714rem + 0.595vw, 1.25rem);
+  --text-sec-body--line-height: clamp(1.875rem, 1.232rem + 1.131vw, 2.125rem);
 
   /* --- Shadow --- */
   --shadow-glow-primary: 0px 4px 40px rgba(145, 255, 2, 0.4);
+
+  /* --- Skill Bar --- */
+  --size-skill-bar-content: clamp(302px, 142.19px + 41.46vw, 467px);
 }
 
 /* --- Base styles --- */
@@ -148,9 +173,125 @@
   }
 }
 
+@layer utilities {
+  .hover-primary:hover {
+    color: var(--color-primary-200);
+  }
+
+  .text-sec-label {
+    font-size: var(--text-sec-label);
+    line-height: var(--text-sec-label--line-height);
+  }
+
+  .text-sec-title {
+    font-size: var(--text-sec-title);
+    line-height: var(--text-sec-title--line-height);
+  }
+
+  .text-sec-body {
+    font-size: var(--text-sec-body);
+    line-height: var(--text-sec-body--line-height);
+  }
+
+  .text-body-responsive {
+    font-size: var(--text-body-responsive);
+    line-height: var(--text-body-responsive--line-height);
+  }
+
+  .text-label-responsive {
+    font-size: var(--text-label-responsive);
+    line-height: var(--text-label-responsive--line-height);
+  }
+
+  .text-title-responsive {
+    font-size: var(--text-title-responsive);
+    line-height: var(--text-title-responsive--line-height);
+  }
+
+  /* --- Cursor blink --- */
+  .animate-blink {
+    animation: blink-cursor 0.7s step-end infinite;
+  }
+
+  .hover-text-primary-200 {
+    color: var(--color-primary-200);
+  }
+}
+
 /* --- Custom Container --- */
 @layer components {
   .custom-container {
     @apply max-w-[1440px] min-w-[393px] mx-auto px-4 md:px-[clamp(1rem,8.89vw,8rem)];
   }
+}
+
+/* --- Keyframes --- */
+@keyframes blink-cursor {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+@keyframes draw-border-path {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes shimmer-slide {
+  from {
+    transform: translateX(-100%) skewX(-15deg);
+  }
+  to {
+    transform: translateX(250%) skewX(-15deg);
+  }
+}
+
+@keyframes card-shimmer-slide {
+  from {
+    transform: translateX(-100%) translateY(-100%) skewX(-15deg);
+  }
+  to {
+    transform: translateX(200%) translateY(200%) skewX(-15deg);
+  }
+}
+
+/* --- Button shimmer --- */
+.shimmer-stripe {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.45) 50%,
+    transparent 100%
+  );
+  transform: translateX(-100%) skewX(-15deg);
+}
+
+.shimmer-run {
+  animation: shimmer-slide 0.75s ease 0s 1 forwards;
+}
+
+/* --- Card shimmer --- */
+.card-shimmer-stripe {
+  width: 60%;
+  height: 200%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    135deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.08) 50%,
+    transparent 100%
+  );
+  transform: translateX(-100%) translateY(-100%) skewX(-15deg);
+}
+
+.card-shimmer-run {
+  animation: card-shimmer-slide 0.9s ease 0s 1 forwards;
 }

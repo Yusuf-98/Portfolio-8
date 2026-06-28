@@ -1,4 +1,12 @@
+'use client';
+
+import { motion } from 'framer-motion';
 import Image from 'next/image';
+import {
+  fadeInUp,
+  fadeInDown,
+  transitionDelayed,
+} from '@/lib/animations/staggered-item';
 import { Container } from '@/components/layout/Container';
 import { SkillBar } from '@/components/ui/SkillBar';
 
@@ -24,40 +32,100 @@ const SKILLS = [
   { name: 'Javascript', percentage: 90 },
 ];
 
+// --- Delay ---
+const D_LABEL = 0.0;
+const D_TITLE = 0.15;
+const D_ICON_ROW1_BASE = 0.3;
+const D_ICON_ROW2_BASE = 0.7;
+const D_ICON_STAGGER = 0.1;
+const D_BAR_BASE = 1.1;
+const D_BAR_STAGGER = 0.3;
+
 // --- Skills section ---
 export function Skills() {
   return (
-    <section className='bg-base-black py-10 md:py-[120px]'>
+    <section className='w-full max-w-360 mx-auto bg-base-black py-10 md:pt-[76px]'>
       <Container>
         <div className='flex flex-col gap-10 md:flex-row md:items-center md:gap-[58px]'>
           {/* Skills content */}
           <div className='flex flex-col gap-6 md:w-[524px] md:shrink-0 md:gap-[58px]'>
-            {/* Skills label */}
-            <span className='text-md font-medium text-primary-200 md:text-lg'>
-              SKILLS
-            </span>
+            <div className='flex flex-col gap-2'>
+              {/* Skills label */}
+              <motion.span
+                variants={fadeInUp}
+                initial='hidden'
+                whileInView='visible'
+                viewport={{ once: true, amount: 0.2 }}
+                transition={transitionDelayed(D_LABEL)}
+                className='text-md font-medium text-primary-200 md:text-lg'
+              >
+                SKILLS
+              </motion.span>
 
-            {/* Skills title */}
-            <h2 className='text-display-md font-extrabold text-neutral-25 md:text-display-2xl'>
-              Skills That Bring Ideas To Life
-            </h2>
+              {/* Skills title */}
+              <motion.h2
+                variants={fadeInUp}
+                initial='hidden'
+                whileInView='visible'
+                viewport={{ once: true, amount: 0.2 }}
+                transition={transitionDelayed(D_TITLE)}
+                className='text-display-md tracking-t-none font-extrabold text-neutral-25 md:text-display-2xl'
+              >
+                SKILLS THAT BRING IDEAS TO LIFE
+              </motion.h2>
+            </div>
 
             {/* Tech icon grid */}
-            <div className='grid grid-cols-4 gap-3 md:gap-4'>
-              {TECH_ICONS.map((icon) => (
-                <div
-                  key={icon.name}
-                  className='flex h-12 w-12 items-center justify-center rounded-full border border-neutral-800 p-1 md:h-16 md:w-16'
-                >
-                  <Image
-                    src={icon.src}
-                    alt={icon.name}
-                    width={48}
-                    height={48}
-                    className='h-full w-full object-contain'
-                  />
-                </div>
-              ))}
+            <div className='flex flex-col gap-6'>
+              {/* Baris 1 - fadeInDown */}
+              <div className='flex flex-row gap-6'>
+                {TECH_ICONS.slice(0, 4).map((icon, i) => (
+                  <motion.div
+                    key={icon.name}
+                    variants={fadeInDown}
+                    initial='hidden'
+                    whileInView='visible'
+                    viewport={{ once: true, amount: 0.2 }}
+                    transition={transitionDelayed(
+                      D_ICON_ROW1_BASE + i * D_ICON_STAGGER
+                    )}
+                    className='flex h-12 w-12 items-center justify-center rounded-full border border-neutral-800 p-1 md:h-16 md:w-16'
+                  >
+                    <Image
+                      src={icon.src}
+                      alt={icon.name}
+                      width={48}
+                      height={48}
+                      className='h-full w-full object-contain'
+                    />
+                  </motion.div>
+                ))}
+              </div>
+
+              {/* Baris 2 - fadeInUp */}
+              <div className='flex flex-row gap-6'>
+                {TECH_ICONS.slice(4, 8).map((icon, i) => (
+                  <motion.div
+                    key={icon.name}
+                    variants={fadeInUp}
+                    initial='hidden'
+                    whileInView='visible'
+                    viewport={{ once: true, amount: 0.2 }}
+                    transition={transitionDelayed(
+                      D_ICON_ROW2_BASE + i * D_ICON_STAGGER
+                    )}
+                    className='flex h-12 w-12 items-center justify-center rounded-full border border-neutral-800 p-1 md:h-16 md:w-16'
+                  >
+                    <Image
+                      src={icon.src}
+                      alt={icon.name}
+                      width={48}
+                      height={48}
+                      className='h-full w-full object-contain'
+                    />
+                  </motion.div>
+                ))}
+              </div>
             </div>
           </div>
 
@@ -68,6 +136,9 @@ export function Skills() {
                 key={`${skill.name}-${index}`}
                 name={skill.name}
                 percentage={skill.percentage}
+                index={index}
+                baseDelay={D_BAR_BASE}
+                stagger={D_BAR_STAGGER}
               />
             ))}
           </div>

@@ -47,29 +47,27 @@ export function Navbar() {
 
   return (
     <header
-      className={`sticky top-0 z-50 w-full transition-colors duration-300 ${
-        isScrolled
-          ? 'border-b border-neutral-800 bg-base-black'
-          : 'border-b border-transparent bg-transparent'
+      className={`sticky top-0 z-50 w-full max-w-360 mx-auto transition-colors duration-300 border-b border-neutral-800  ${
+        isScrolled ? ' bg-base-black' : 'bg-transparent'
       }`}
     >
       <Container>
-        <div className='flex h-20 items-center justify-between gap-4xl'>
+        <div className='flex h-20 items-center justify-between gap-4xl md:gap-sm lg:gap-4xl'>
           <div className='flex items-center w-full'>
             {/* --- Logo --- */}
             <Link
               href='#hero'
-              className='flex w-full items-center gap-2.25 md:gap-2'
+              className='flex w-full items-center gap-2.25 lg:gap-2'
             >
-              <span className='h-0 border w-6 border-base-white md:w-10' />
-              <span className='w-full text-md font-bold text-primary-200 md:text-xl md:p-2'>
+              <span className='h-0 border w-6 border-base-white lg:w-10' />
+              <span className='w-full text-md font-bold text-primary-200 lg:text-xl lg:p-2'>
                 Edwin Anderson.
               </span>
             </Link>
           </div>
 
           {/* --- Desktop Nav --- */}
-          <nav className='hidden items-center justify-center gap-4xl md:flex'>
+          <nav className='hidden items-center justify-center gap-4xl md:gap-3xl lg:gap-4xl md:flex'>
             {NAV_LINKS.map((link) => (
               <motion.div
                 key={link.href}
@@ -78,7 +76,7 @@ export function Navbar() {
               >
                 <Link
                   href={link.href}
-                  className='flex p-2 gap-2 text-md text-base-white transition-colors duration-300 hover:text-primary-200'
+                  className='flex p-1 lg:p-2 gap-1 lg:gap-2 text-md text-base-white transition-colors duration-300 hover-primary'
                 >
                   {link.label}
                 </Link>
@@ -119,7 +117,7 @@ export function Navbar() {
 
                   <Dialog.Content asChild forceMount>
                     <motion.div
-                      className='fixed right-0 top-0 z-50 flex h-full w-full max-w-full flex-col gap-4xl border-l border-neutral-800 bg-base-black px-xl py-7xl'
+                      className='fixed right-0 top-0 z-50 flex h-full w-full max-w-full flex-col gap-4xl border-l border-neutral-800 bg-base-black px-xl pt-6 pb-7xl'
                       initial={{ x: '100%' }}
                       animate={{ x: 0 }}
                       exit={{ x: '100%' }}
@@ -130,7 +128,7 @@ export function Navbar() {
                       }}
                       onClick={() => setOpen(false)}
                     >
-                      <div className='flex items-center justify-between'>
+                      <div className='flex items-center justify-between '>
                         <Dialog.Title className='flex items-center gap-2 text-md font-bold text-primary-200'>
                           <span className='h-px w-6 bg-base-white' />
                           Edwin Anderson.
@@ -163,7 +161,7 @@ export function Navbar() {
                             <Dialog.Close asChild>
                               <Link
                                 href={link.href}
-                                className='text-lg text-base-white transition-colors duration-300 hover:text-primary-200'
+                                className='text-md text-base-white transition-colors duration-300 hover-primary'
                               >
                                 {link.label}
                               </Link>

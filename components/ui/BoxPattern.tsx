@@ -1,3 +1,6 @@
+'use client';
+
+import { forwardRef } from 'react';
 import { cn } from '@/lib/utils';
 
 // --- Box pattern decoration ---
@@ -14,38 +17,40 @@ const rotateClass: Record<number, string> = {
   270: 'rotate-270',
 };
 
-// Outer box keeps the final visual footprint (left/top anchor stays put).
-// Inner grid keeps the pattern's native size and rotates inside the outer box,
-// so 90/270 rotation never shifts the intended position.
 const isSwapped = (rotate: number) => rotate === 90 || rotate === 270;
 
-export function BoxPattern({ rotate = 0, className, style }: BoxPatternProps) {
-  const swapped = isSwapped(rotate);
+export const BoxPattern = forwardRef<HTMLDivElement, BoxPatternProps>(
+  ({ rotate = 0, className, style }, ref) => {
+    const swapped = isSwapped(rotate);
 
-  return (
-    <div
-      className={cn(
-        'absolute z-10 flex items-center justify-center',
-        swapped
-          ? 'h-[103.5px] w-[69px] md:h-[138px] md:w-[92px]'
-          : 'h-[69px] w-[103.5px] md:h-[92px] md:w-[138px]',
-        className
-      )}
-      style={style}
-    >
+    return (
       <div
+        ref={ref}
         className={cn(
-          'grid h-[69px] w-[103.5px] shrink-0 grid-cols-3 grid-rows-2 md:h-[92px] md:w-[138px]',
-          rotateClass[rotate]
+          'z-50 flex items-center justify-center',
+          swapped
+            ? 'h-[103.5px] w-[69px] md:h-[138px] md:w-[92px]'
+            : 'h-[69px] w-[103.5px] md:h-[92px] md:w-[138px]',
+          className
         )}
+        style={style}
       >
-        {/* Box */}
-        <div className='col-start-1 row-start-2 h-full w-full bg-primary-400' />
-        {/* Box */}
-        <div className='col-start-3 row-start-2 h-full w-full bg-primary-400' />
-        {/* Box */}
-        <div className='col-start-2 row-start-1 h-full w-full bg-primary-400' />
+        <div
+          className={cn(
+            'grid h-[69px] w-[103.5px] shrink-0 grid-cols-3 grid-rows-2 md:h-[92px] md:w-[138px]',
+            rotateClass[rotate]
+          )}
+        >
+          {/* Box */}
+          <div className='col-start-1 row-start-2 h-full w-full bg-primary-400' />
+          {/* Box */}
+          <div className='col-start-3 row-start-2 h-full w-full bg-primary-400' />
+          {/* Box */}
+          <div className='col-start-2 row-start-1 h-full w-full bg-primary-400' />
+        </div>
       </div>
-    </div>
-  );
-}
+    );
+  }
+);
+
+BoxPattern.displayName = 'BoxPattern';

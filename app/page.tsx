@@ -1,10 +1,14 @@
+import Footer from '@/components/layout/Footer';
 import { Navbar } from '@/components/layout/Navbar';
 import { About } from '@/components/sections/About';
-import { Experience } from '@/components/sections/Experience';
+import ContactSection from '@/components/sections/ContactSection';
+import ExperienceWorkWrapper from '@/components/sections/ExperienceWorkWrapper';
+import FAQSection from '@/components/sections/FAQSection';
 import { Hero } from '@/components/sections/Hero';
+import PortfolioSection from '@/components/sections/PortfolioSection';
 import { Services } from '@/components/sections/Services';
 import { Skills } from '@/components/sections/Skills';
-import WorkSection from '@/components/sections/WorkSection';
+import TestimonialsSection from '@/components/sections/TestimonialsSection';
 
 export default function Home() {
   return (
@@ -14,8 +18,12 @@ export default function Home() {
       <Services />
       <About />
       <Skills />
-      <Experience />
-      <WorkSection />
+      <ExperienceWorkWrapper />
+      <PortfolioSection />
+      <TestimonialsSection />
+      <FAQSection />
+      <ContactSection />
+      <Footer />
     </main>
   );
 }

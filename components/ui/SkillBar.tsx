@@ -1,44 +1,89 @@
+'use client';
+
+import { useEffect, useRef, useState } from 'react';
+import { motion, useInView, animate } from 'framer-motion';
 import { cn } from '@/lib/utils';
 
 // --- Skill bar component ---
 type SkillBarProps = {
   name: string;
   percentage: number;
+  index: number;
+  baseDelay: number;
+  stagger: number;
   className?: string;
 };
 
-export function SkillBar({ name, percentage, className }: SkillBarProps) {
+export function SkillBar({
+  name,
+  percentage,
+  index,
+  baseDelay,
+  stagger,
+  className,
+}: SkillBarProps) {
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { once: true, amount: 0.5 });
+  const [count, setCount] = useState<number | null>(null);
+  const delay = baseDelay + index * stagger;
+  const duration = 1.2;
+
+  useEffect(() => {
+    if (!isInView) return;
+    const timeout = setTimeout(() => {
+      const controls = animate(0, percentage, {
+        duration,
+        ease: 'easeOut',
+        onUpdate: (v) => setCount(Math.round(v)),
+      });
+      return () => controls.stop();
+    }, delay * 1000);
+    return () => clearTimeout(timeout);
+  }, [isInView, percentage, delay]);
+
   return (
     <div
+      ref={ref}
       className={cn(
         'flex h-10 w-full items-center gap-4 md:h-16 md:gap-6',
         className
       )}
     >
-      {/* Skill bar track */}
-      <div className='relative flex h-full flex-1 items-center'>
-        <span className='h-px w-full bg-neutral-700' />
-
-        {/* Skill bar fill */}
-        <div
-          className='absolute left-0 flex h-full items-center rounded-[20px] px-4 md:px-6'
+      {/* Skill bar content */}
+      <div
+        className='flex h-full items-center'
+        style={{ width: 'var(--size-skill-bar-content)' }}
+      >
+        {/* Skill bar label */}
+        <motion.div
+          className='relative flex h-full items-center overflow-hidden rounded-[12.94px] md:rounded-[20px]'
+          initial={{ width: '0%' }}
+          animate={isInView ? { width: `${percentage}%` } : { width: '0%' }}
+          transition={{ duration, ease: 'easeOut', delay }}
           style={{
-            width: `${percentage}%`,
-            minWidth: 'fit-content',
-            backgroundColor: '#3A6601',
-            backgroundImage:
-              'repeating-linear-gradient(-115deg, transparent, transparent 7px, rgba(253,253,253,0.15) 7px, rgba(253,253,253,0.15) 8px, transparent 8px, transparent 16.52px)',
+            minWidth: '0px',
+            backgroundImage: `repeating-linear-gradient(-115deg, #3A6601, #3A6601 7px, rgba(253,253,253,0.4) 7px, rgba(253,253,253,0.4) 8px, #3A6601 8px, #3A6601 16.52px)`,
+            isolation: 'isolate',
           }}
         >
-          <span className='whitespace-nowrap text-sm font-semibold text-neutral-25 md:text-lg'>
+          <span className='relative z-10 whitespace-nowrap px-[15.52px] py-[5.17px] text-sm font-semibold text-neutral-25 md:px-6 md:py-2 md:text-lg'>
             {name}
           </span>
-        </div>
+        </motion.div>
+
+        {/* Skill bar line */}
+        <motion.div
+          className='h-px bg-neutral-800'
+          initial={{ opacity: 0 }}
+          animate={isInView ? { opacity: 0.6 } : { opacity: 0 }}
+          transition={{ duration, ease: 'easeOut', delay }}
+          style={{ flex: 1 }}
+        />
       </div>
 
       {/* Skill percentage */}
-      <span className='text-sm font-semibold text-base-white md:text-xl'>
-        {percentage}%
+      <span className='text-right text-sm font-semibold text-base-white md:text-xl'>
+        {count !== null ? `${count}%` : ''}
       </span>
     </div>
   );
