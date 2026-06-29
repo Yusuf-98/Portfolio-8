@@ -275,7 +275,13 @@ export function Hero() {
             </div>
 
             {/* Black fade gradient */}
-            <div className='absolute w-full inset-0 bg-linear-to-b from-transparent via-90% via-base-black to-base-black z-5' />
+            <div
+              className='absolute w-full inset-0'
+              style={{
+                background:
+                  'linear-gradient(180deg, rgba(0,0,0,0.5) 0%, #000000 90%)',
+              }}
+            />
 
             {/* Wrapper B: color reveal canvas */}
             <div
