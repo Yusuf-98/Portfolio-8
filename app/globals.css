@@ -182,7 +182,7 @@
   }
 
   body {
-    @apply bg-base-black text-base-white font-display antialiased overflow-x-hidden;
+    @apply bg-base-black text-base-white font-display antialiased;
   }
 }
 
