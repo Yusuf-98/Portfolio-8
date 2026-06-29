@@ -26,7 +26,7 @@ export function SkillBar({
   const isInView = useInView(ref, { once: true, amount: 0.5 });
   const [count, setCount] = useState<number | null>(null);
   const delay = baseDelay + index * stagger;
-  const duration = 1.2;
+  const duration = 0.5;
 
   useEffect(() => {
     if (!isInView) return;

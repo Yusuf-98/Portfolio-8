@@ -182,7 +182,7 @@ export function About() {
               className='absolute'
             >
               <motion.div
-                variants={fadeInLeft}
+                variants={fadeInDown}
                 initial='hidden'
                 whileInView='visible'
                 viewport={{ once: true, amount: 0.2 }}
@@ -205,7 +205,7 @@ export function About() {
               className='absolute'
             >
               <motion.div
-                variants={fadeInRight}
+                variants={fadeInDown}
                 initial='hidden'
                 whileInView='visible'
                 viewport={{ once: true, amount: 0.2 }}
