@@ -114,7 +114,7 @@ export default function ContactSection() {
   return (
     <section
       id='contact'
-      className='relative w-full max-w-360 mx-auto border-t border-neutral-800 bg-base-black md:pt-20 pb-30 z-20'
+      className='relative w-full max-w-360 mx-auto border-t border-neutral-800 bg-base-black pt-10 md:pt-0 pb-17 md:pb-30 z-20'
     >
       {/* BoxPattern kiri atas */}
       <motion.div
@@ -123,7 +123,7 @@ export default function ContactSection() {
         whileInView='visible'
         viewport={{ once: true, amount: 0.2 }}
         transition={transitionDelayed(0.6)}
-        className='absolute top-0'
+        className='absolute top-0 z-20'
         style={{ left: 0 }}
       >
         <BoxPattern rotate={180} />
@@ -143,10 +143,7 @@ export default function ContactSection() {
       </motion.div>
 
       <Container>
-        <div
-          className='flex flex-col md:flex-row md:items-center lg:pt-19'
-          style={{ gap: 'clamp(2.5rem, 8.47vw, 7.63rem)' }}
-        >
+        <div className='flex flex-col md:flex-row md:items-center lg:pt-19 gap-30.5 md:gap-[clamp(2.5rem,8.47vw,7.63rem)]'>
           {/* --- Contact Content --- */}
           <motion.div
             variants={fadeInUp}
@@ -187,7 +184,7 @@ export default function ContactSection() {
             <div
               className='absolute -top-10 pointer-events-none'
               style={{
-                inset: '-20px',
+                inset: '-16px',
                 background:
                   'linear-gradient(180deg, rgba(0,0,0,0) -92.59%, #000000 88.93%)',
               }}
@@ -259,17 +256,17 @@ export default function ContactSection() {
             whileInView='visible'
             viewport={{ once: true, amount: 0.2 }}
             transition={transitionDelayed(0.3)}
-            className='flex flex-col gap-6 lg:gap-12 lg:flex-6'
+            className='flex flex-col gap-6 lg:gap-12 md:flex-6'
           >
             {/* Form header */}
-            <div className='flex flex-col items-center gap-2 lg:items-start'>
+            <div className='flex flex-col items-start gap-2'>
               <motion.span
                 variants={fadeInUp}
                 initial='hidden'
                 whileInView='visible'
                 viewport={{ once: true, amount: 0.2 }}
                 transition={transitionDelayed(0)}
-                className='text-md font-medium text-primary-200 lg:text-sec-label'
+                className='text-md font-medium text-primary-200 md:text-sec-label'
               >
                 CONTACT
               </motion.span>
@@ -279,7 +276,7 @@ export default function ContactSection() {
                 whileInView='visible'
                 viewport={{ once: true, amount: 0.2 }}
                 transition={transitionDelayed(0.15)}
-                className='font-extrabold text-neutral-25 text-center lg:text-left lg:text-sec-title'
+                className='text-display-md font-extrabold text-neutral-25 text-center lg:text-left md:text-sec-title'
               >
                 LET&apos;S GET IN TOUCH
               </motion.h2>
@@ -297,7 +294,7 @@ export default function ContactSection() {
                   label='Name'
                   name='name'
                   type='text'
-                  placeholder='Enter your name'
+                  placeholder=''
                   value={formData.name}
                   onChange={handleChange}
                   error={errors.name}
@@ -314,7 +311,7 @@ export default function ContactSection() {
                   label='Email'
                   name='email'
                   type='email'
-                  placeholder='Enter your email'
+                  placeholder=''
                   value={formData.email}
                   onChange={handleChange}
                   error={errors.email}
@@ -330,7 +327,7 @@ export default function ContactSection() {
                 <TextareaField
                   label='Message'
                   name='message'
-                  placeholder='Enter your message'
+                  placeholder=''
                   value={formData.message}
                   onChange={handleChange}
                   error={errors.message}

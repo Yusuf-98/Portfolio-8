@@ -9,11 +9,11 @@ export default function ExperienceWorkWrapper() {
   const workRef = useRef<HTMLDivElement>(null);
 
   return (
-    <>
+    <div className=''>
       <Experience workRef={workRef} />
       <div ref={workRef}>
         <WorkSection />
       </div>
-    </>
+    </div>
   );
 }

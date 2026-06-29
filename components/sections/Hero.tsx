@@ -243,7 +243,7 @@ export function Hero() {
             initial='hidden'
             animate='visible'
             transition={transitionScaleDelayed(D_IMAGE)}
-            className='relative mt-2 pt-3 md:mt-7xl aspect-393/513 w-full md:hidden'
+            className='relative mt-2 pt-3 md:mt-7xl aspect-393/513 w-full min-w-98.25 md:hidden'
             onMouseMove={mobileHandleMouseMove}
             onMouseEnter={mobileHandleMouseEnter}
             onMouseLeave={mobileHandleMouseLeave}
@@ -252,12 +252,12 @@ export function Hero() {
             onTouchEnd={handleTouchEnd}
           >
             {/* Lime background block */}
-            <div className='absolute left-[51.9%] top-[1.5%] h-[90.8%] w-[51.6%] bg-primary-200' />
+            <div className='absolute right-0 top-[1.5%] h-[90.8%] w-[48%] bg-primary-200' />
 
             {/* Wrapper A: grayscale canvas + mix-blend-luminosity */}
             <div
               ref={mobileWrapperRef}
-              className='absolute left-[1.5%] top-0 h-[98.1%] w-[96.7%] mix-blend-luminosity pointer-events-none'
+              className='absolute left-0 top-0 h-[98.1%] w-[98.5%] mix-blend-luminosity pointer-events-none'
               style={{ transform: 'rotate(-1.45deg)' }}
             >
               <canvas
@@ -275,11 +275,11 @@ export function Hero() {
             </div>
 
             {/* Black fade gradient */}
-            <div className='absolute w-[108.9%] inset-0 bg-linear-to-b from-transparent via-90% via-base-black to-base-black z-5' />
+            <div className='absolute w-full inset-0 bg-linear-to-b from-transparent via-90% via-base-black to-base-black z-5' />
 
             {/* Wrapper B: color reveal canvas */}
             <div
-              className='absolute left-[1.5%] top-0 h-[98.1%] w-[96.7%] pointer-events-none'
+              className='absolute left-0 top-0 h-[98.1%] w-[98.5%] pointer-events-none'
               style={{ transform: 'rotate(-1.45deg)' }}
             >
               <canvas

@@ -27,7 +27,7 @@ export function ServiceCard({
       viewport={{ once: true, amount: 0.3 }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
       whileHover={{ scale: 1.05 }}
-      className='flex flex-1 flex-col gap-3 md:gap-sec-card-title cursor-pointer'
+      className='w-full md:max-w-90 flex flex-col gap-3 md:gap-sec-card-title cursor-pointer'
     >
       {/* Service number */}
       <span className='text-md md:text-sec-body font-semibold text-neutral-400'>

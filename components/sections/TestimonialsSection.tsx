@@ -78,10 +78,10 @@ export default function TestimonialsSection() {
   };
 
   return (
-    <section className='relative w-full max-w-360 mx-auto bg-base-black py-10 md:py-20 z-20'>
+    <section className='relative w-full max-w-360 mx-auto bg-base-black py-12 md:py-20 z-20'>
       <Container>
         {/* --- Testimonials Header --- */}
-        <div className='flex flex-col items-center gap-2 mb-2 md:mb-16 z-20'>
+        <div className='flex flex-col items-center gap-2 mb-6 md:mb-16 z-20'>
           {/* Section label */}
           <motion.span
             variants={fadeInUp}
@@ -101,7 +101,7 @@ export default function TestimonialsSection() {
             whileInView='visible'
             viewport={{ once: true, amount: 0.2 }}
             transition={transitionDelayed(0.15)}
-            className='text-display-md tracking-t-none font-bold text-neutral-25 text-center md:text-sec-title md:font-extrabold'
+            className='w-73 md:w-full text-display-md tracking-t-none font-bold text-neutral-25 text-center md:text-sec-title md:font-extrabold'
           >
             PEOPLE SAYS ABOUT ME
           </motion.h2>

@@ -39,7 +39,7 @@ const D_CARD_STAGGER = 0.15;
 // --- Services section ---
 export function Services() {
   return (
-    <section className='w-full max-w-360 mx-auto bg-base-black py-10 md:pt-[120px] md:pb-[70px]'>
+    <section className='w-full max-w-360 mx-auto bg-base-black pb-20 md:pt-30 md:pb-17.5'>
       <Container>
         <div className='flex flex-col gap-6 md:gap-16'>
           {/* Services header */}
@@ -66,7 +66,7 @@ export function Services() {
               whileInView='visible'
               viewport={{ once: true, amount: 0.2 }}
               transition={transitionDelayed(D_DESC)}
-              className='text-md md:text-sec-body font-medium text-neutral-400 md:max-w-[504px] md:text-right'
+              className='text-md md:text-sec-body font-medium text-neutral-400 md:max-w-126 md:text-right'
             >
               Creating modern, intuitive, and visually consistent web
               experiences that align with industry trends and user expectations.

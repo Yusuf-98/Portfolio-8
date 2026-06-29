@@ -36,9 +36,9 @@ const SKILLS = [
 const D_LABEL = 0.0;
 const D_TITLE = 0.15;
 const D_ICON_ROW1_BASE = 0.3;
-const D_ICON_ROW2_BASE = 0.7;
+const D_ICON_ROW2_BASE = 0.3;
 const D_ICON_STAGGER = 0.1;
-const D_BAR_BASE = 1.1;
+const D_BAR_BASE = 0.5;
 const D_BAR_STAGGER = 0.3;
 
 // --- Skills section ---
