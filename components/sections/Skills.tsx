@@ -33,7 +33,7 @@ const SKILLS = [
 ];
 
 // --- Delay ---
-const D_LABEL = 0.15;
+const D_LABEL = 0.0;
 const D_TITLE = 0.15;
 const D_ICON_ROW1_BASE = 0.3;
 const D_ICON_ROW2_BASE = 0.3;

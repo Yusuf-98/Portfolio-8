@@ -266,7 +266,7 @@ export default function ContactSection() {
                 whileInView='visible'
                 viewport={{ once: true, amount: 0.2 }}
                 transition={transitionDelayed(0)}
-                className='text-md font-medium text-primary-200 lg:text-sec-label'
+                className='text-md font-medium text-primary-200 md:text-sec-label'
               >
                 CONTACT
               </motion.span>
@@ -276,7 +276,7 @@ export default function ContactSection() {
                 whileInView='visible'
                 viewport={{ once: true, amount: 0.2 }}
                 transition={transitionDelayed(0.15)}
-                className='font-extrabold text-neutral-25 text-center lg:text-left lg:text-sec-title'
+                className='text-display-md font-extrabold text-neutral-25 text-center lg:text-left md:text-sec-title'
               >
                 LET&apos;S GET IN TOUCH
               </motion.h2>
@@ -294,7 +294,7 @@ export default function ContactSection() {
                   label='Name'
                   name='name'
                   type='text'
-                  placeholder='Enter your name'
+                  placeholder=''
                   value={formData.name}
                   onChange={handleChange}
                   error={errors.name}
@@ -311,7 +311,7 @@ export default function ContactSection() {
                   label='Email'
                   name='email'
                   type='email'
-                  placeholder='Enter your email'
+                  placeholder=''
                   value={formData.email}
                   onChange={handleChange}
                   error={errors.email}
@@ -327,7 +327,7 @@ export default function ContactSection() {
                 <TextareaField
                   label='Message'
                   name='message'
-                  placeholder='Enter your message'
+                  placeholder=''
                   value={formData.message}
                   onChange={handleChange}
                   error={errors.message}
