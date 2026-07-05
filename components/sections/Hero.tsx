@@ -257,21 +257,23 @@ export function Hero() {
             {/* Wrapper A: grayscale canvas + mix-blend-luminosity */}
             <div
               ref={mobileWrapperRef}
-              className='absolute left-0 top-0 h-[98.1%] w-[98.5%] mix-blend-luminosity pointer-events-none'
+              className='absolute left-0 top-0 h-[98.1%] w-[98.5%] pointer-events-none'
               style={{ transform: 'rotate(-1.45deg)' }}
             >
-              <canvas
-                ref={mobileMaskRef}
-                width={MOBILE_W}
-                height={MOBILE_H}
-                className='hidden'
-              />
-              <canvas
-                ref={mobileGrayCanvasRef}
-                width={MOBILE_W}
-                height={MOBILE_H}
-                style={{ width: '100%', height: '100%' }}
-              />
+              <div className='mix-blend-luminosity w-full h-full'>
+                <canvas
+                  ref={mobileMaskRef}
+                  width={MOBILE_W}
+                  height={MOBILE_H}
+                  className='hidden'
+                />
+                <canvas
+                  ref={mobileGrayCanvasRef}
+                  width={MOBILE_W}
+                  height={MOBILE_H}
+                  style={{ width: '100%', height: '100%' }}
+                />
+              </div>
             </div>
 
             {/* Black fade gradient */}
