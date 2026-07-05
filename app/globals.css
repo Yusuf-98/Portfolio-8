@@ -275,7 +275,7 @@
 /* --- Custom Container --- */
 @layer components {
   .custom-container {
-    @apply max-w-360 min-w-98.25 mx-auto px-4 md:px-[clamp(1rem,8.89vw,8rem)];
+    @apply max-w-360 mx-auto px-4 md:px-[clamp(1rem,8.89vw,8rem)];
   }
 }
 
