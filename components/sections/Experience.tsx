@@ -154,7 +154,7 @@ export function Experience({ workRef }: ExperienceProps) {
         // Unfix saat work-top menyentuh top viewport
         if (workRef.current) {
           const workRect = workRef.current.getBoundingClientRect();
-          if (workRect.top <= 0) {
+          if (workRect.top > windowHeight || workRect.top < 0) {
             unfix();
             return;
           }
@@ -166,11 +166,9 @@ export function Experience({ workRef }: ExperienceProps) {
       } else {
         if (workRef.current) {
           const workRect = workRef.current.getBoundingClientRect();
-          if (workRect.top > windowHeight && workRect.top > 0) {
+          if (workRect.top > windowHeight || workRect.top < 0) {
             unfix();
-          } else if (workRect.top >= windowHeight && workRect.top < 0) {
-            fix();
-          } else if (workRect.top < windowHeight && workRect.top < 0) {
+          } else if (workRect.top <= windowHeight && workRect.top >= 0) {
             fix();
           }
         }
