@@ -152,7 +152,7 @@ export default function ContactSection() {
             viewport={{ once: true, amount: 0.2 }}
             transition={transitionDelayed(0.3)}
             className='relative w-full md:flex-4'
-            style={{ aspectRatio: '420/557' }}
+            style={{ aspectRatio: '420/557', isolation: 'isolate' }}
             onMouseMove={handleMouseMove}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
@@ -163,23 +163,21 @@ export default function ContactSection() {
             {/* Wrapper A: grayscale canvas + mix-blend-luminosity */}
             <div
               ref={wrapperRef}
-              className='absolute -top-10 inset-0 pointer-events-none'
+              className='absolute -top-10 inset-0 mix-blend-luminosity pointer-events-none'
               style={{ transform: 'rotate(-1.45deg)' }}
             >
-              <div className='mix-blend-luminosity w-full h-full'>
-                <canvas
-                  ref={maskRef}
-                  width={CONTACT_W}
-                  height={CONTACT_H}
-                  className='hidden'
-                />
-                <canvas
-                  ref={grayCanvasRef}
-                  width={CONTACT_W}
-                  height={CONTACT_H}
-                  style={{ width: '100%', height: '94%' }}
-                />
-              </div>
+              <canvas
+                ref={maskRef}
+                width={CONTACT_W}
+                height={CONTACT_H}
+                className='hidden'
+              />
+              <canvas
+                ref={grayCanvasRef}
+                width={CONTACT_W}
+                height={CONTACT_H}
+                style={{ width: '100%', height: '94%' }}
+              />
             </div>
 
             {/* Gradient overlay */}

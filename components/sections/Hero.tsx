@@ -250,6 +250,7 @@ export function Hero() {
             onTouchMove={handleTouchMove}
             onTouchStart={handleTouchStart}
             onTouchEnd={handleTouchEnd}
+            style={{ isolation: 'isolate' }}
           >
             {/* Lime background block */}
             <div className='absolute right-0 top-[1.5%] h-[90.8%] w-[48%] bg-primary-200' />
@@ -257,23 +258,21 @@ export function Hero() {
             {/* Wrapper A: grayscale canvas + mix-blend-luminosity */}
             <div
               ref={mobileWrapperRef}
-              className='absolute left-0 top-0 h-[98.1%] w-[98.5%] pointer-events-none'
+              className='absolute left-0 top-0 h-[98.1%] w-[98.5%] mix-blend-luminosity pointer-events-none'
               style={{ transform: 'rotate(-1.45deg)' }}
             >
-              <div className='mix-blend-luminosity w-full h-full'>
-                <canvas
-                  ref={mobileMaskRef}
-                  width={MOBILE_W}
-                  height={MOBILE_H}
-                  className='hidden'
-                />
-                <canvas
-                  ref={mobileGrayCanvasRef}
-                  width={MOBILE_W}
-                  height={MOBILE_H}
-                  style={{ width: '100%', height: '100%' }}
-                />
-              </div>
+              <canvas
+                ref={mobileMaskRef}
+                width={MOBILE_W}
+                height={MOBILE_H}
+                className='hidden'
+              />
+              <canvas
+                ref={mobileGrayCanvasRef}
+                width={MOBILE_W}
+                height={MOBILE_H}
+                style={{ width: '100%', height: '100%' }}
+              />
             </div>
 
             {/* Black fade gradient */}
@@ -333,6 +332,7 @@ export function Hero() {
           right: '0',
           width: 'clamp(24.56rem, 45.84vw, 41.26rem)',
           height: 'clamp(32.51rem, 60.67vw, 54.60rem)',
+          isolation: 'isolate',
         }}
         onMouseMove={handleMouseMove}
         onMouseEnter={handleMouseEnter}
