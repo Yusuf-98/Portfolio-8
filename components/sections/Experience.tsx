@@ -296,7 +296,7 @@ export function Experience({ workRef }: ExperienceProps) {
               initial='hidden'
               whileInView='visible'
               viewport={{ once: true, amount: 0.5 }}
-              className='w-full md:w-60'
+              className='w-[calc(100%-10px)] md:w-60'
             >
               <Button className='w-full cursor-pointer'>HIRE ME</Button>
             </motion.div>
