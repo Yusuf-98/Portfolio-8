@@ -286,7 +286,7 @@ export function Hero() {
 
             {/* Wrapper B: color reveal canvas */}
             <div
-              className='absolute left-0 top-0 h-[98.1%] w-[98.5%] pointer-events-none'
+              className='absolute left-0 top-0 h-[98.1%] w-[98.5%] pointer-events-none hidden'
               style={{ transform: 'rotate(-1.45deg)' }}
             >
               <canvas
