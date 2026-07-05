@@ -1,9 +1,9 @@
 import type { Variants, Transition } from 'framer-motion';
 
 const X = 120;
-const Y = 60;
-const OPACITY_DURATION = 0.9;
-const Y_DURATION = 0.7;
+const Y = 30;
+const OPACITY_DURATION = 1.4;
+const Y_DURATION = 1.4;
 const STAGGER = 0.15;
 
 export const transition: Transition = {

@@ -37,13 +37,13 @@ const SUBTITLE_TEXT =
 
 // --- Delay urutan muncul ---
 const D_GREETING = 0.2;
-const D_TITLE = 0.5;
-const D_SUBTITLE = 0.8;
-const D_BUTTON = 1.1;
-const D_IMAGE = 1.4;
-const D_RATING = (D_IMAGE + 0.9) * 1000;
-const D_BOXPATTERN = D_IMAGE + 1.2;
-const D_HELM = D_IMAGE + 1.5;
+const D_TITLE = 0.4;
+const D_SUBTITLE = 0.6;
+const D_BUTTON = 0.8;
+const D_IMAGE = 1.0;
+const D_RATING = (D_IMAGE + 0.3) * 1000;
+const D_BOXPATTERN = D_IMAGE + 0.6;
+const D_HELM = D_IMAGE + 0.6;
 
 const renderTitle = (text: string) => {
   const keyword = 'interactive';

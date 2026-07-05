@@ -16,9 +16,9 @@ type RatingCardProps = {
 const SCORE_TEXT = '5.0';
 const CAPTION_TEXT = 'Many Client Trust with me';
 const STAR_COUNT = 5;
-const BORDER_DRAW_DURATION = 4800;
-const CONTENT_START_DELAY = 200;
-const TYPE_SPEED = 90;
+const BORDER_DRAW_DURATION = 700;
+const CONTENT_START_DELAY = 0;
+const TYPE_SPEED = 50;
 const CORNER_GLOW_PEAK_MS = 2000;
 const CORNER_GLOW_CYCLE_MS = 4000;
 

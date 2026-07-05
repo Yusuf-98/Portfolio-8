@@ -17,11 +17,11 @@ import { FloatingBoat } from '@/lib/animations/floating-boat';
 // --- Delay urutan muncul ---
 const D_LABEL = 0.0;
 const D_TITLE_1 = 0.15;
-const D_TITLE_2 = 0.6;
-const D_TEXT = 0.75;
-const D_IMG_1 = 0.9;
-const D_IMG_2 = 1.05;
-const D_IMG_3 = 1.2;
+const D_TITLE_2 = 0.3;
+const D_TEXT = 0.45;
+const D_IMG_1 = 0.6;
+const D_IMG_2 = 0.75;
+const D_IMG_3 = 0.9;
 
 // --- About section ---
 export function About() {
