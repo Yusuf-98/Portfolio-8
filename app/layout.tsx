@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
 import { Red_Hat_Display } from 'next/font/google';
 import './globals.css';
-import { OverflowDebugger } from '@/components/debug/OverflowDebugger';
 
 const redHatDisplay = Red_Hat_Display({
   subsets: ['latin'],
@@ -22,8 +21,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='en' className={`${redHatDisplay.variable}`}>
-      {children}
-      <OverflowDebugger />
       <body className='antialiased'>{children}</body>
     </html>
   );
