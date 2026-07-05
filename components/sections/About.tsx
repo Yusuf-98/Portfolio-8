@@ -28,7 +28,7 @@ export function About() {
   return (
     <section
       id='about'
-      className='relative w-full max-w-360 mx-auto bg-base-black md:pb-30'
+      className='relative w-full max-w-360 mx-auto bg-base-black md:pb-30 overflow-x-hidden'
     >
       {/* Box pattern */}
       <motion.div

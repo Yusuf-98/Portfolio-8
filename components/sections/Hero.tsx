@@ -243,7 +243,7 @@ export function Hero() {
             initial='hidden'
             animate='visible'
             transition={transitionScaleDelayed(D_IMAGE)}
-            className='relative mt-2 pt-3 md:mt-7xl aspect-393/513 w-full min-w-98.25 md:hidden'
+            className='relative mt-2 pt-3 md:mt-7xl aspect-393/513 w-full min-w-98.25 md:hidden overflow-hidden'
             onMouseMove={mobileHandleMouseMove}
             onMouseEnter={mobileHandleMouseEnter}
             onMouseLeave={mobileHandleMouseLeave}

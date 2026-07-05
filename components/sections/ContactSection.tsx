@@ -114,7 +114,7 @@ export default function ContactSection() {
   return (
     <section
       id='contact'
-      className='relative w-full max-w-360 mx-auto border-t border-neutral-800 bg-base-black pt-10 md:pt-0 pb-17 md:pb-30 z-20'
+      className='relative w-full max-w-360 mx-auto border-t border-neutral-800 bg-base-black pt-10 md:pt-0 pb-17 md:pb-30 z-20 overflow-x-hidden'
     >
       {/* BoxPattern kiri atas */}
       <motion.div
