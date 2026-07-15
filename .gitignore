@@ -4,6 +4,8 @@
 /node_modules
 /.pnp
 .pnp.*
+.DS_Store
+*.pem
 .yarn/*
 !.yarn/patches
 !.yarn/plugins
@@ -19,10 +21,6 @@
 
 # production
 /build
-
-# misc
-.DS_Store
-*.pem
 
 # debug
 npm-debug.log*
