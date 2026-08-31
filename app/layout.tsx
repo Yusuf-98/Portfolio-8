@@ -9,9 +9,9 @@ const redHatDisplay = Red_Hat_Display({
 });
 
 export const metadata: Metadata = {
-  title: 'Edwin Anderson | Frontend Developer Portfolio',
+  title: 'Yusuf Arif | Frontend Developer Portfolio',
   description:
-    'Portfolio of Edwin Anderson, a Frontend Developer building responsive, fast, and scalable websites.',
+    'Portfolio of Yusuf Arif, a Frontend Developer building responsive, fast, and scalable websites.',
 };
 
 export default function RootLayout({

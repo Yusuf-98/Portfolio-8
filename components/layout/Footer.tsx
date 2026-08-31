@@ -27,7 +27,7 @@ export default function Footer() {
           transition={transitionDelayed(0.2)}
           className='text-xs md:text-md font-normal text-neutral-400 text-center'
         >
-          © 2025 Edwin Anderson. All rights reserved.
+          © 2025 Yusuf Arif. All rights reserved.
         </motion.p>
       </div>
     </motion.footer>

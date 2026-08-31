@@ -237,7 +237,7 @@ export default function ContactSection() {
               {/* Name + availability */}
               <div className='flex flex-col items-center gap-1'>
                 <span className='text-md font-bold text-white text-center lg:text-xl'>
-                  Edwin Anderson
+                  Yusuf Arif
                 </span>
                 <div className='flex flex-row items-center gap-3'>
                   <div className='w-3 h-3 rounded-full bg-primary-200 shrink-0' />

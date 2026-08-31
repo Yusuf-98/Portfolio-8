@@ -225,7 +225,7 @@ export function Experience({ workRef }: ExperienceProps) {
                 <div className='relative h-15 w-15 shrink-0 overflow-hidden rounded-full bg-neutral-950 md:h-20 md:w-20'>
                   <Image
                     src='/icons/edwin-anderson.png'
-                    alt='Edwin Anderson'
+                    alt='Yusuf Arif'
                     fill
                     sizes='(min-width: 768px) 80px, 60px'
                     className='object-cover'
