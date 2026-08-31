@@ -21,7 +21,7 @@ const NAV_LINKS = [
   { label: 'Contact', href: '#contact' },
 ];
 
-const LOGO_TEXT = 'Yusuf Arif.';
+const LOGO_TEXT = 'yusuf Arif.';
 const LOGO_LETTERS = LOGO_TEXT.split('');
 
 function LogoLetters({ className }: { className?: string }) {

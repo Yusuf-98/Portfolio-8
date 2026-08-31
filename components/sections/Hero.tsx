@@ -184,7 +184,7 @@ export function Hero() {
             >
               <span className='h-px bg-neutral-25 w-5.25 lg:w-[clamp(1.31rem,7.92vw,7.13rem)]' />
               <p className='text-md font-medium text-neutral-25 lg:text-xl'>
-                Hi, I am Yusuf Arif{' '}
+                Hi, I am yusuf Arif{' '}
                 <span className='inline-block min-w-[1ch]'>
                   {greetingWord}
                   <span
