@@ -253,13 +253,13 @@ export function Hero() {
             style={{ isolation: 'isolate' }}
           >
             {/* Lime background block */}
-            <div className='absolute right-0 top-[1.5%] h-[90.8%] w-[48%] bg-primary-200' />
+            <div className='absolute right-0 top-[0%] h-[90.8%] w-[48%] bg-primary-200' />
 
             {/* Wrapper A: grayscale canvas + mix-blend-luminosity */}
             <div
               ref={mobileWrapperRef}
               className='absolute left-0 top-0 h-[98.1%] w-[98.5%] mix-blend-luminosity pointer-events-none'
-              style={{ transform: 'rotate(-1.45deg)' }}
+              style={{ transform: 'rotate(5deg)' }}
             >
               <canvas
                 ref={mobileMaskRef}
@@ -287,7 +287,7 @@ export function Hero() {
             {/* Wrapper B: color reveal canvas */}
             <div
               className='absolute left-0 top-0 h-[98.1%] w-[98.5%] pointer-events-none'
-              style={{ transform: 'rotate(-1.45deg)' }}
+              style={{ transform: 'rotate(5deg)' }}
             >
               <canvas
                 ref={mobileColorCanvasRef}
@@ -307,6 +307,26 @@ export function Hero() {
             >
               <HelmOverlay />
             </motion.div>
+
+            {/* Black triangle masking the top-left corner of the photo */}
+            <div
+              className='absolute inset-0 z-20 bg-base-black pointer-events-none'
+              style={{
+                // 1st %: seberapa jauh alas menjulur ke kanan
+                // 2nd %: seberapa dalam sisi miring turun memotong pojok
+                clipPath: 'polygon(0 0, 25% 0, 0 35%)',
+              }}
+            />
+
+            {/* Black triangle masking the bottom-right corner of the photo */}
+            <div
+              className='absolute inset-0 z-20 bg-base-black pointer-events-none'
+              style={{
+                // 1st %: seberapa jauh alas menjulur ke kiri di sepanjang tepi bawah
+                // 2nd %: seberapa tinggi sisi miring naik menutup pojok kanan
+                clipPath: 'polygon(100% 100%, 90% 100%, 100% 35%)',
+              }}
+            />
           </motion.div>
         </div>
 
@@ -345,7 +365,7 @@ export function Hero() {
         <div
           ref={desktopWrapperRef}
           className='absolute h-[98.9%] w-[98.2%] mix-blend-luminosity pointer-events-none'
-          style={{ transform: 'rotate(0deg)' }}
+          style={{ transform: 'rotate(5deg)' }}
         >
           <canvas
             ref={desktopMaskRef}
@@ -373,8 +393,8 @@ export function Hero() {
 
         {/* Wrapper B: color reveal canvas */}
         <div
-          className='absolute left-[-1.5%] top-[-0.8%] h-full w-[100.5%] pointer-events-none'
-          style={{ transform: 'rotate(-1.45deg)' }}
+          className='absolute h-[98.9%] w-[98.2%] pointer-events-none'
+          style={{ transform: 'rotate(5deg)' }}
         >
           <canvas
             ref={desktopColorCanvasRef}
@@ -394,6 +414,26 @@ export function Hero() {
         >
           <HelmOverlay />
         </motion.div>
+
+        {/* Black triangle masking the top-left corner of the photo */}
+        <div
+          className='absolute inset-0 z-20 bg-base-black pointer-events-none'
+          style={{
+            // 1st %: seberapa jauh alas menjulur ke kanan (arah antara "Skill" & "Projects")
+            // 2nd %: seberapa dalam sisi miring turun memotong pojok
+            clipPath: 'polygon(0 0, 25% 0, 0 35%)',
+          }}
+        />
+
+        {/* Black triangle masking the bottom-right corner of the photo */}
+        <div
+          className='absolute inset-0 z-20 bg-base-black pointer-events-none'
+          style={{
+            // 1st %: seberapa jauh alas menjulur ke kiri di sepanjang tepi bawah
+            // 2nd %: seberapa tinggi sisi miring naik menutup pojok kanan
+            clipPath: 'polygon(100% 100%, 80% 100%, 100% 35%)',
+          }}
+        />
       </motion.div>
     </section>
   );

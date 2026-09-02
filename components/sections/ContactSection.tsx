@@ -164,7 +164,7 @@ export default function ContactSection() {
             <div
               ref={wrapperRef}
               className='absolute -top-10 inset-0 mix-blend-luminosity pointer-events-none'
-              style={{ transform: 'rotate(-1.45deg)' }}
+              style={{ transform: 'rotate(5deg)' }}
             >
               <canvas
                 ref={maskRef}
@@ -184,7 +184,7 @@ export default function ContactSection() {
             <div
               className='absolute -top-10 pointer-events-none'
               style={{
-                inset: '-16px',
+                inset: '10px',
                 background:
                   'linear-gradient(180deg, rgba(0,0,0,0) -92.59%, #000000 88.93%)',
               }}
@@ -193,7 +193,7 @@ export default function ContactSection() {
             {/* Wrapper B: color reveal canvas */}
             <div
               className='absolute -top-10 inset-0 pointer-events-none'
-              style={{ transform: 'rotate(-1.45deg)' }}
+              style={{ transform: 'rotate(5deg)' }}
             >
               <canvas
                 ref={colorCanvasRef}
@@ -219,6 +219,8 @@ export default function ContactSection() {
                   <a
                     key={item.alt}
                     href={item.href}
+                    target='_blank'
+                    rel='noopener noreferrer'
                     className='flex items-center justify-center w-12 h-12 lg:w-16 lg:h-16 rounded-full bg-base-black border border-neutral-800 transition-transform duration-500 hover-scale'
                   >
                     <div className='relative w-8 h-8 lg:w-9.5 lg:h-9.5'>
