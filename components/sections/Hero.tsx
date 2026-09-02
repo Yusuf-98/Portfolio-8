@@ -324,7 +324,7 @@ export function Hero() {
               style={{
                 // 1st %: seberapa jauh alas menjulur ke kiri di sepanjang tepi bawah
                 // 2nd %: seberapa tinggi sisi miring naik menutup pojok kanan
-                clipPath: 'polygon(100% 100%, 90% 100%, 100% 35%)',
+                clipPath: 'polygon(100% 100%, 80% 100%, 100% 10%)',
               }}
             />
           </motion.div>
