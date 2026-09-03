@@ -1,6 +1,7 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
 import {
   fadeInUp,
@@ -86,6 +87,19 @@ export function Hero() {
     handleTouchEnd,
   } = mobile;
 
+  // --- Mobile "tap to lock" reveal ---
+  const [mobileLocked, setMobileLocked] = useState(false);
+
+  const lockMobileReveal = () => {
+    setMobileLocked(true);
+    handleTouchStart(); // batalkan fade yang mungkin masih berjalan
+  };
+
+  const unlockMobileReveal = () => {
+    setMobileLocked(false);
+    handleTouchEnd(); // fade balik ke grayscale, scroll aktif lagi
+  };
+
   const {
     wrapperRef: desktopWrapperRef,
     grayCanvasRef: desktopGrayCanvasRef,
@@ -169,6 +183,71 @@ export function Hero() {
         <BoxPattern rotate={0} />
       </motion.div>
 
+      {/* Mobile hint: tap to lock / back to scroll — sebaris dengan box pattern */}
+      <button
+        type='button'
+        onClick={mobileLocked ? unlockMobileReveal : lockMobileReveal}
+        className='absolute bottom-56 right-4 z-50 flex items-center gap-3 md:hidden'
+      >
+        <AnimatePresence mode='wait' initial={false}>
+          <motion.span
+            key={mobileLocked ? 'locked-label' : 'unlocked-label'}
+            initial={{ opacity: 0, x: 6 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: 6 }}
+            transition={{ duration: 0.2 }}
+            className='text-[11px] font-semibold uppercase tracking-[0.14em] text-white'
+          >
+            {mobileLocked ? 'Back to scroll' : 'Tap to lock'}
+          </motion.span>
+        </AnimatePresence>
+
+        <span className='flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-primary-200 text-base-black'>
+          <AnimatePresence mode='wait' initial={false}>
+            {mobileLocked ? (
+              <motion.svg
+                key='x'
+                initial={{ opacity: 0, rotate: -30 }}
+                animate={{ opacity: 1, rotate: 0 }}
+                exit={{ opacity: 0, rotate: 30 }}
+                transition={{ duration: 0.18 }}
+                width='32'
+                height='32'
+                viewBox='0 0 24 24'
+                fill='none'
+                stroke='currentColor'
+                strokeWidth='2'
+                strokeLinecap='round'
+                strokeLinejoin='round'
+              >
+                <path d='M6 6l12 12M18 6L6 18' />
+              </motion.svg>
+            ) : (
+              <motion.svg
+                key='hand'
+                initial={{ opacity: 0, y: 4 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -4 }}
+                transition={{ duration: 0.18 }}
+                width='32'
+                height='32'
+                viewBox='0 0 24 24'
+                fill='none'
+                stroke='currentColor'
+                strokeWidth='1.6'
+                strokeLinecap='round'
+                strokeLinejoin='round'
+              >
+                <path d='M8 13V5.5a1.75 1.75 0 0 1 3.5 0V11' />
+                <path d='M11.5 11V9.25a1.75 1.75 0 0 1 3.5 0V11' />
+                <path d='M15 11v-.75a1.75 1.75 0 0 1 3.5 0V15a6 6 0 0 1-6 6h-1a6 6 0 0 1-4.6-2.15l-3-3.6a1.75 1.75 0 0 1 2.7-2.2L8 12.5' />
+                <path d='M4.5 4.5 3 3M9 3.5 9.5 2M14.5 4.5 16 3' />
+              </motion.svg>
+            )}
+          </AnimatePresence>
+        </span>
+      </button>
+
       <Container className='relative'>
         {/* Hero content */}
         <div className='relative md:max-w-90.25 z-30 flex flex-col items-center pb-7xl md:items-start md:pb-10xl md:text-left pt-[clamp(7.5rem,18.67vw,13.81rem)]'>
@@ -247,10 +326,14 @@ export function Hero() {
             onMouseMove={mobileHandleMouseMove}
             onMouseEnter={mobileHandleMouseEnter}
             onMouseLeave={mobileHandleMouseLeave}
-            onTouchMove={handleTouchMove}
-            onTouchStart={handleTouchStart}
-            onTouchEnd={handleTouchEnd}
-            style={{ isolation: 'isolate' }}
+            onClick={mobileLocked ? undefined : lockMobileReveal}
+            onTouchMove={mobileLocked ? handleTouchMove : undefined}
+            onTouchStart={mobileLocked ? handleTouchStart : undefined}
+            style={{
+              isolation: 'isolate',
+              // saat locked, matikan scroll browser di area foto -> drag = melukis
+              touchAction: mobileLocked ? 'none' : 'pan-y',
+            }}
           >
             {/* Lime background block */}
             <div className='absolute right-0 top-[0%] h-[90.8%] w-[48%] bg-primary-200' />
@@ -327,6 +410,7 @@ export function Hero() {
                 clipPath: 'polygon(100% 100%, 80% 100%, 100% 10%)',
               }}
             />
+
           </motion.div>
         </div>
 
