@@ -174,7 +174,7 @@ export function Navbar() {
                           <button
                             type='button'
                             aria-label='Close menu'
-                            className='flex h-6 w-6 items-center justify-center cursor-pointer'
+                            className='flex h-6 w-6 items-center justify-center cursor-pointer outline-none focus:outline-none focus-visible:outline-none'
                           >
                             <Image
                               src='/icons/close.png'
