@@ -187,7 +187,7 @@ export function Hero() {
       <button
         type='button'
         onClick={mobileLocked ? unlockMobileReveal : lockMobileReveal}
-        className='absolute bottom-56 right-4 z-50 flex items-center gap-3 md:hidden'
+        className='absolute bottom-56 right-4 z-50 flex items-center gap-3 cursor-pointer md:hidden'
       >
         <AnimatePresence mode='wait' initial={false}>
           <motion.span
@@ -410,7 +410,6 @@ export function Hero() {
                 clipPath: 'polygon(100% 100%, 80% 100%, 100% 10%)',
               }}
             />
-
           </motion.div>
         </div>
 
