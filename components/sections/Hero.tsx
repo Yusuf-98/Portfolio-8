@@ -85,7 +85,6 @@ export function Hero() {
     handleTouchMove,
     handleTouchStart,
     handleTouchEnd,
-    startAutoReveal: startMobileAutoReveal,
   } = mobile;
 
   // --- Mobile "tap to lock" reveal ---
@@ -199,7 +198,7 @@ export function Hero() {
             transition={{ duration: 0.2 }}
             className='text-[11px] font-semibold uppercase tracking-[0.14em] text-white'
           >
-            {mobileLocked ? 'Back to scroll' : 'Tap to reveal'}
+            {mobileLocked ? 'Back to scroll' : 'Tap to lock'}
           </motion.span>
         </AnimatePresence>
 
@@ -323,17 +322,17 @@ export function Hero() {
             initial='hidden'
             animate='visible'
             transition={transitionScaleDelayed(D_IMAGE)}
-            viewport={{ once: true, amount: 0.4 }}
-            onViewportEnter={() => startMobileAutoReveal(1100)}
             className='relative mt-2 pt-3 md:mt-7xl aspect-393/513 w-full min-w-98.25 md:hidden overflow-hidden'
             onMouseMove={mobileHandleMouseMove}
             onMouseEnter={mobileHandleMouseEnter}
             onMouseLeave={mobileHandleMouseLeave}
-            onClick={mobileLocked ? undefined : lockMobileReveal}
-            onTouchMove={mobileLocked ? handleTouchMove : undefined}
-            onTouchStart={mobileLocked ? handleTouchStart : undefined}
+            onTouchMove={handleTouchMove}
+            onTouchStart={handleTouchStart}
+            onTouchEnd={mobileLocked ? undefined : handleTouchEnd}
             style={{
               isolation: 'isolate',
+              // locked: semua drag melukis. unlocked: drag horizontal melukis,
+              // drag vertikal tetap men-scroll halaman.
               touchAction: mobileLocked ? 'none' : 'pan-y',
             }}
           >

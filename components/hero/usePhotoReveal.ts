@@ -25,11 +25,6 @@ export function usePhotoReveal({ src, width, height }: UsePhotoRevealOptions) {
   const maskRef = useRef<HTMLCanvasElement>(null);
   const colorImgRef = useRef<HTMLImageElement | null>(null);
   const fadeRafRef = useRef<number | null>(null);
-  const autoRevealRafRef = useRef<number | null>(null);
-  const autoRevealTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(
-    null
-  );
-  const autoRevealDoneRef = useRef(false);
 
   // --- drawGrayscale ---
   const drawGrayscale = useCallback(() => {
@@ -212,68 +207,6 @@ export function usePhotoReveal({ src, width, height }: UsePhotoRevealOptions) {
     triggerFade();
   }, [triggerFade]);
 
-  // --- Auto reveal teaser (mobile): sapu kuas sekali lalu fade balik ---
-  const startAutoReveal = useCallback(
-    (delayMs = 0) => {
-      if (autoRevealDoneRef.current) return;
-      autoRevealDoneRef.current = true;
-
-      const prefersReduced =
-        typeof window !== 'undefined' &&
-        window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      if (prefersReduced) return;
-
-      const run = () => {
-        const mask = maskRef.current;
-        if (!mask || !colorImgRef.current) return;
-
-        // Path: sapuan diagonal ber-gelombang menyilang foto
-        const points: { x: number; y: number }[] = [];
-        const steps = 48;
-        for (let i = 0; i <= steps; i++) {
-          const t = i / steps;
-          const x = width * (0.12 + 0.76 * t);
-          const y =
-            height * (0.24 + 0.46 * t) +
-            Math.sin(t * Math.PI * 2) * height * 0.08;
-          points.push({ x, y });
-        }
-
-        const duration = 900;
-        const start = performance.now();
-        let lastIndex = -1;
-
-        const frame = (now: number) => {
-          const p = Math.min((now - start) / duration, 1);
-          const eased =
-            p < 0.5 ? 2 * p * p : 1 - Math.pow(-2 * p + 2, 2) / 2;
-          const target = Math.floor(eased * (points.length - 1));
-          for (let i = lastIndex + 1; i <= target; i++) {
-            paintBrush(points[i].x, points[i].y);
-          }
-          lastIndex = target;
-
-          if (p < 1) {
-            autoRevealRafRef.current = requestAnimationFrame(frame);
-          } else {
-            autoRevealRafRef.current = null;
-            // tahan sebentar lalu memudar kembali ke grayscale
-            autoRevealTimeoutRef.current = setTimeout(triggerFade, 600);
-          }
-        };
-
-        autoRevealRafRef.current = requestAnimationFrame(frame);
-      };
-
-      if (delayMs > 0) {
-        autoRevealTimeoutRef.current = setTimeout(run, delayMs);
-      } else {
-        run();
-      }
-    },
-    [width, height, paintBrush, triggerFade]
-  );
-
   // --- Init mask canvas ---
   useEffect(() => {
     const mask = maskRef.current;
@@ -281,18 +214,6 @@ export function usePhotoReveal({ src, width, height }: UsePhotoRevealOptions) {
     mask.width = width;
     mask.height = height;
   }, [width, height]);
-
-  // --- Cleanup auto reveal ---
-  useEffect(() => {
-    return () => {
-      if (autoRevealRafRef.current !== null) {
-        cancelAnimationFrame(autoRevealRafRef.current);
-      }
-      if (autoRevealTimeoutRef.current !== null) {
-        clearTimeout(autoRevealTimeoutRef.current);
-      }
-    };
-  }, []);
 
   // --- Load image ---
   useEffect(() => {
@@ -317,6 +238,5 @@ export function usePhotoReveal({ src, width, height }: UsePhotoRevealOptions) {
     handleTouchMove,
     handleTouchStart,
     handleTouchEnd,
-    startAutoReveal,
   };
 }
