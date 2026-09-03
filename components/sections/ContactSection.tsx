@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { BoxPattern } from '@/components/ui/BoxPattern';
 import { Button } from '@/components/ui/Button';
 import { InputField } from '@/components/ui/InputField';
@@ -71,6 +71,19 @@ export default function ContactSection() {
     height: CONTACT_H,
   });
 
+  // --- Mobile "tap to lock" reveal ---
+  const [contactLocked, setContactLocked] = useState(false);
+
+  const lockContactReveal = () => {
+    setContactLocked(true);
+    handleTouchStart();
+  };
+
+  const unlockContactReveal = () => {
+    setContactLocked(false);
+    handleTouchEnd();
+  };
+
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
@@ -114,9 +127,9 @@ export default function ContactSection() {
   return (
     <section
       id='contact'
-      className='relative w-full max-w-360 mx-auto border-t border-neutral-800 bg-base-black pt-10 md:pt-0 pb-17 md:pb-30 z-20 overflow-x-hidden'
+      className='relative w-full max-w-360 mx-auto border-t border-neutral-800 bg-base-black pt-10 md:pt-0 pb-25 md:pb-30 z-20 overflow-x-hidden'
     >
-      {/* BoxPattern kiri atas */}
+      {/* BoxPattern top left */}
       <motion.div
         variants={fadeInUp}
         initial='hidden'
@@ -129,7 +142,7 @@ export default function ContactSection() {
         <BoxPattern rotate={180} />
       </motion.div>
 
-      {/* BoxPattern kanan bawah */}
+      {/* BoxPattern bottom right */}
       <motion.div
         variants={fadeInDown}
         initial='hidden'
@@ -152,13 +165,17 @@ export default function ContactSection() {
             viewport={{ once: true, amount: 0.2 }}
             transition={transitionDelayed(0.3)}
             className='relative w-full md:flex-4'
-            style={{ aspectRatio: '420/557', isolation: 'isolate' }}
+            style={{
+              aspectRatio: '420/557',
+              isolation: 'isolate',
+              touchAction: contactLocked ? 'none' : 'pan-y',
+            }}
             onMouseMove={handleMouseMove}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
             onTouchMove={handleTouchMove}
             onTouchStart={handleTouchStart}
-            onTouchEnd={handleTouchEnd}
+            onTouchEnd={contactLocked ? undefined : handleTouchEnd}
           >
             {/* Wrapper A: grayscale canvas + mix-blend-luminosity */}
             <div
@@ -184,7 +201,7 @@ export default function ContactSection() {
             <div
               className='absolute -top-10 pointer-events-none'
               style={{
-                inset: '10px',
+                inset: '-2px',
                 background:
                   'linear-gradient(180deg, rgba(0,0,0,0) -92.59%, #000000 88.93%)',
               }}
@@ -249,6 +266,77 @@ export default function ContactSection() {
                 </div>
               </div>
             </motion.div>
+
+            {/* Mobile: tap to lock / back to scroll */}
+            <button
+              type='button'
+              onClick={(e) => {
+                e.stopPropagation();
+                if (contactLocked) unlockContactReveal();
+                else lockContactReveal();
+              }}
+              onTouchStart={(e) => e.stopPropagation()}
+              onTouchEnd={(e) => e.stopPropagation()}
+              className='absolute right-3 bottom-30 z-30 flex items-center gap-3 md:hidden'
+            >
+              <AnimatePresence mode='wait' initial={false}>
+                <motion.span
+                  key={contactLocked ? 'locked-label' : 'unlocked-label'}
+                  initial={{ opacity: 0, x: 6 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: 6 }}
+                  transition={{ duration: 0.2 }}
+                  className='text-[9px] font-semibold uppercase tracking-[0.14em] text-white'
+                >
+                  {contactLocked ? 'Back to scroll' : 'Tap to lock'}
+                </motion.span>
+              </AnimatePresence>
+
+              <span className='flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-primary-200 text-base-black cursor-pointer'>
+                <AnimatePresence mode='wait' initial={false}>
+                  {contactLocked ? (
+                    <motion.svg
+                      key='x'
+                      initial={{ opacity: 0, rotate: -30 }}
+                      animate={{ opacity: 1, rotate: 0 }}
+                      exit={{ opacity: 0, rotate: 30 }}
+                      transition={{ duration: 0.18 }}
+                      width='30'
+                      height='30'
+                      viewBox='0 0 24 24'
+                      fill='none'
+                      stroke='currentColor'
+                      strokeWidth='2'
+                      strokeLinecap='round'
+                      strokeLinejoin='round'
+                    >
+                      <path d='M6 6l12 12M18 6L6 18' />
+                    </motion.svg>
+                  ) : (
+                    <motion.svg
+                      key='hand'
+                      initial={{ opacity: 0, y: 4 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -4 }}
+                      transition={{ duration: 0.18 }}
+                      width='30'
+                      height='30'
+                      viewBox='0 0 24 24'
+                      fill='none'
+                      stroke='currentColor'
+                      strokeWidth='1.6'
+                      strokeLinecap='round'
+                      strokeLinejoin='round'
+                    >
+                      <path d='M8 13V5.5a1.75 1.75 0 0 1 3.5 0V11' />
+                      <path d='M11.5 11V9.25a1.75 1.75 0 0 1 3.5 0V11' />
+                      <path d='M15 11v-.75a1.75 1.75 0 0 1 3.5 0V15a6 6 0 0 1-6 6h-1a6 6 0 0 1-4.6-2.15l-3-3.6a1.75 1.75 0 0 1 2.7-2.2L8 12.5' />
+                      <path d='M4.5 4.5 3 3M9 3.5 9.5 2M14.5 4.5 16 3' />
+                    </motion.svg>
+                  )}
+                </AnimatePresence>
+              </span>
+            </button>
           </motion.div>
 
           {/* --- Contact Form --- */}
