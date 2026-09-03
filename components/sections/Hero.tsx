@@ -19,7 +19,7 @@ import { CometLine } from '../ui/CometLine';
 import { usePhotoReveal } from '../hero/usePhotoReveal';
 import { useTypewriterSequence } from '../hero/useTypewriter';
 
-// --- Konstanta dimensi foto ---
+// --- Photo dimension ---
 const MOBILE_W = 360;
 const MOBILE_H = 470;
 const DESKTOP_W = 660;
@@ -36,7 +36,7 @@ const TITLE_TEXT = 'Building fast & interactive web experiences.';
 const SUBTITLE_TEXT =
   'Bridging creativity and functionality to deliver stunning, user-friendly web applications';
 
-// --- Delay urutan muncul ---
+// --- Delay ---
 const D_GREETING = 0.2;
 const D_TITLE = 0.4;
 const D_SUBTITLE = 0.6;
@@ -92,12 +92,12 @@ export function Hero() {
 
   const lockMobileReveal = () => {
     setMobileLocked(true);
-    handleTouchStart(); // batalkan fade yang mungkin masih berjalan
+    handleTouchStart();
   };
 
   const unlockMobileReveal = () => {
     setMobileLocked(false);
-    handleTouchEnd(); // fade balik ke grayscale, scroll aktif lagi
+    handleTouchEnd();
   };
 
   const {
@@ -183,11 +183,11 @@ export function Hero() {
         <BoxPattern rotate={0} />
       </motion.div>
 
-      {/* Mobile hint: tap to lock / back to scroll — sebaris dengan box pattern */}
+      {/* Mobile: tap to lock / back to scroll*/}
       <button
         type='button'
         onClick={mobileLocked ? unlockMobileReveal : lockMobileReveal}
-        className='absolute bottom-56 right-4 z-50 flex items-center gap-3 cursor-pointer md:hidden'
+        className='absolute bottom-56 right-4 z-50 flex items-center gap-3 md:hidden'
       >
         <AnimatePresence mode='wait' initial={false}>
           <motion.span
@@ -202,7 +202,7 @@ export function Hero() {
           </motion.span>
         </AnimatePresence>
 
-        <span className='flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-primary-200 text-base-black'>
+        <span className='flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-primary-200 text-base-black cursor-pointer'>
           <AnimatePresence mode='wait' initial={false}>
             {mobileLocked ? (
               <motion.svg
@@ -331,7 +331,6 @@ export function Hero() {
             onTouchStart={mobileLocked ? handleTouchStart : undefined}
             style={{
               isolation: 'isolate',
-              // saat locked, matikan scroll browser di area foto -> drag = melukis
               touchAction: mobileLocked ? 'none' : 'pan-y',
             }}
           >
@@ -395,8 +394,8 @@ export function Hero() {
             <div
               className='absolute inset-0 z-20 bg-base-black pointer-events-none'
               style={{
-                // 1st %: seberapa jauh alas menjulur ke kanan
-                // 2nd %: seberapa dalam sisi miring turun memotong pojok
+                // 1st %: to right
+                // 2nd %: to bottom
                 clipPath: 'polygon(0 0, 25% 0, 0 35%)',
               }}
             />
@@ -405,8 +404,8 @@ export function Hero() {
             <div
               className='absolute inset-0 z-20 bg-base-black pointer-events-none'
               style={{
-                // 1st %: seberapa jauh alas menjulur ke kiri di sepanjang tepi bawah
-                // 2nd %: seberapa tinggi sisi miring naik menutup pojok kanan
+                // 1st %: to left
+                // 2nd %: to top
                 clipPath: 'polygon(100% 100%, 80% 100%, 100% 10%)',
               }}
             />
@@ -502,8 +501,8 @@ export function Hero() {
         <div
           className='absolute inset-0 z-20 bg-base-black pointer-events-none'
           style={{
-            // 1st %: seberapa jauh alas menjulur ke kanan (arah antara "Skill" & "Projects")
-            // 2nd %: seberapa dalam sisi miring turun memotong pojok
+            // 1st %: to right
+            // 2nd %: to bottom
             clipPath: 'polygon(0 0, 25% 0, 0 35%)',
           }}
         />
@@ -512,8 +511,8 @@ export function Hero() {
         <div
           className='absolute inset-0 z-20 bg-base-black pointer-events-none'
           style={{
-            // 1st %: seberapa jauh alas menjulur ke kiri di sepanjang tepi bawah
-            // 2nd %: seberapa tinggi sisi miring naik menutup pojok kanan
+            // 1st %: to left
+            // 2nd %: to top
             clipPath: 'polygon(100% 100%, 80% 100%, 100% 35%)',
           }}
         />
