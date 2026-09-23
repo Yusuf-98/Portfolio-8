@@ -267,7 +267,7 @@ export default function ContactSection() {
               </div>
             </motion.div>
 
-            {/* Mobile: tap to lock / back to scroll */}
+            {/* Lock hint */}
             <button
               type='button'
               onClick={(e) => {
