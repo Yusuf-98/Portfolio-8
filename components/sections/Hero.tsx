@@ -183,7 +183,7 @@ export function Hero() {
         <BoxPattern rotate={0} />
       </motion.div>
 
-      {/* Mobile: tap to lock / back to scroll*/}
+      {/* Lock hint */}
       <button
         type='button'
         onClick={mobileLocked ? unlockMobileReveal : lockMobileReveal}
@@ -331,8 +331,6 @@ export function Hero() {
             onTouchEnd={mobileLocked ? undefined : handleTouchEnd}
             style={{
               isolation: 'isolate',
-              // locked: semua drag melukis. unlocked: drag horizontal melukis,
-              // drag vertikal tetap men-scroll halaman.
               touchAction: mobileLocked ? 'none' : 'pan-y',
             }}
           >
@@ -392,24 +390,16 @@ export function Hero() {
               <HelmOverlay />
             </motion.div>
 
-            {/* Black triangle masking the top-left corner of the photo */}
+            {/* Top-left triangle */}
             <div
               className='absolute inset-0 z-20 bg-base-black pointer-events-none'
-              style={{
-                // 1st %: to right
-                // 2nd %: to bottom
-                clipPath: 'polygon(0 0, 25% 0, 0 35%)',
-              }}
+              style={{ clipPath: 'polygon(0 0, 25% 0, 0 35%)' }}
             />
 
-            {/* Black triangle masking the bottom-right corner of the photo */}
+            {/* Bottom-right triangle */}
             <div
               className='absolute inset-0 z-20 bg-base-black pointer-events-none'
-              style={{
-                // 1st %: to left
-                // 2nd %: to top
-                clipPath: 'polygon(100% 100%, 80% 100%, 100% 10%)',
-              }}
+              style={{ clipPath: 'polygon(100% 100%, 80% 100%, 100% 10%)' }}
             />
           </motion.div>
         </div>
@@ -499,24 +489,16 @@ export function Hero() {
           <HelmOverlay />
         </motion.div>
 
-        {/* Black triangle masking the top-left corner of the photo */}
+        {/* Top-left triangle */}
         <div
           className='absolute inset-0 z-20 bg-base-black pointer-events-none'
-          style={{
-            // 1st %: to right
-            // 2nd %: to bottom
-            clipPath: 'polygon(0 0, 25% 0, 0 35%)',
-          }}
+          style={{ clipPath: 'polygon(0 0, 25% 0, 0 35%)' }}
         />
 
-        {/* Black triangle masking the bottom-right corner of the photo */}
+        {/* Bottom-right triangle */}
         <div
           className='absolute inset-0 z-20 bg-base-black pointer-events-none'
-          style={{
-            // 1st %: to left
-            // 2nd %: to top
-            clipPath: 'polygon(100% 100%, 80% 100%, 100% 35%)',
-          }}
+          style={{ clipPath: 'polygon(100% 100%, 80% 100%, 100% 35%)' }}
         />
       </motion.div>
     </section>
