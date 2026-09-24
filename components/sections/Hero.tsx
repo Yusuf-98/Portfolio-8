@@ -29,7 +29,7 @@ const GREETING_WORDS = [
   'Software Engineer',
   'Frontend Developer',
   'App Developer',
-  'React Expert',
+  'React Developer',
 ];
 
 const TITLE_TEXT = 'Building fast & interactive web experiences.';
