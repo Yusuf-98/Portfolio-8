@@ -12,7 +12,7 @@ const services = [
     icon: '/icons/service-design-code.svg',
     title: 'Design-to-Code',
     description:
-      'Turning Figma design specs into responsive, pixel-accurate interfaces with React, Next.js and Tailwind CSS.',
+      'Turning design specs from tools like Figma into responsive, pixel-accurate interfaces with React, Next.js and Tailwind CSS.',
   },
   {
     number: '02',
