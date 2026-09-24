@@ -9,28 +9,28 @@ import { ServiceCard } from '@/components/service/ServiceCard';
 const services = [
   {
     number: '01',
-    icon: '/icons/monitor-01.png',
-    title: 'Custom Website Development',
+    icon: '/icons/service-design-code.svg',
+    title: 'Design-to-Code',
     description:
-      'Building responsive, fast, and scalable websites tailored to your needs.',
+      'Turning design specs into responsive, pixel-accurate interfaces with React, Next.js and Tailwind CSS.',
   },
   {
     number: '02',
-    icon: '/icons/monitor-01.png',
-    title: 'Web Performance Optimization',
+    icon: '/icons/service-data.svg',
+    title: 'Data-Driven Features',
     description:
-      'Enhancing website speed, SEO, and overall performance for better results.',
+      'Building complete flows (authentication, forms, cart and checkout) on real REST APIs with TanStack Query.',
   },
   {
     number: '03',
-    icon: '/icons/monitor-01.png',
-    title: 'Website Maintenance & Debugging',
+    icon: '/icons/service-quality.svg',
+    title: 'Quality & Delivery',
     description:
-      'Fixing bugs, improving UI, and ensuring smooth performance over time.',
+      'Shipping typed, tested code with TypeScript, automated tests, CI and Vercel deployments.',
   },
 ];
 
-// --- Delay urutan muncul ---
+// --- Delays ---
 const D_HEADER = 0.1;
 const D_DESC = 0.25;
 const D_CARD_BASE = 0.4;
@@ -42,7 +42,7 @@ export function Services() {
     <section className='w-full max-w-360 mx-auto bg-base-black pb-20 md:pt-30 md:pb-17.5'>
       <Container>
         <div className='flex flex-col gap-6 md:gap-16'>
-          {/* Services header */}
+          {/* Header */}
           <div className='flex flex-col gap-4 md:flex-row md:items-center md:justify-between'>
             <motion.div
               variants={fadeInUp}
@@ -53,10 +53,10 @@ export function Services() {
               className='flex flex-col w-full md:w-60 lg:w-127.25 gap-2 md:gap-2'
             >
               <span className='text-md md:text-sec-label font-medium text-primary-200'>
-                SERVICE
+                EXPERTISE
               </span>
               <h2 className='text-display-md md:text-sec-title font-extrabold text-neutral-25'>
-                MY SERVICE EXPERTISE
+                WHAT I DO
               </h2>
             </motion.div>
 
@@ -68,12 +68,12 @@ export function Services() {
               transition={transitionDelayed(D_DESC)}
               className='text-md md:text-sec-body font-medium text-neutral-400 md:max-w-126 md:text-right'
             >
-              Creating modern, intuitive, and visually consistent web
-              experiences that align with industry trends and user expectations.
+              Precise interfaces, reliable data flows, and code that is easy to
+              maintain.
             </motion.p>
           </div>
 
-          {/* Services cards */}
+          {/* Cards */}
           <div className='flex flex-col gap-6 md:flex-row md:gap-3xl lg:gap-5xl'>
             {services.map((service, index) => (
               <motion.div
