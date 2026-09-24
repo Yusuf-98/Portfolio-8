@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 import Image from 'next/image';
 import { AnimatePresence, motion } from 'framer-motion';
 import * as Dialog from '@radix-ui/react-dialog';
@@ -211,14 +211,15 @@ interface ProjectModalProps {
   projects: Project[];
   index: number | null;
   onIndexChange: (index: number | null) => void;
+  returnFocusRef: React.RefObject<HTMLElement | null>;
 }
 
 export default function ProjectModal({
   projects,
   index,
   onIndexChange,
+  returnFocusRef,
 }: ProjectModalProps) {
-  const triggerRef = useRef<HTMLElement | null>(null);
   const project = index === null ? null : projects[index];
   const total = projects.length;
 
@@ -247,12 +248,9 @@ export default function ProjectModal({
             <Dialog.Content
               asChild
               forceMount
-              onOpenAutoFocus={() => {
-                triggerRef.current = document.activeElement as HTMLElement;
-              }}
               onCloseAutoFocus={(e) => {
                 e.preventDefault();
-                triggerRef.current?.focus();
+                returnFocusRef.current?.focus();
               }}
             >
               <motion.div
