@@ -14,7 +14,7 @@ import { Container } from '@/components/layout/Container';
 import { BoxPattern } from '@/components/ui/BoxPattern';
 import { FloatingBoat } from '@/lib/animations/floating-boat';
 
-// --- Delay urutan muncul ---
+// --- Delays ---
 const D_LABEL = 0.0;
 const D_TITLE_1 = 0.15;
 const D_TITLE_2 = 0.3;
@@ -85,7 +85,7 @@ export function About() {
                 <span className='text-neutral-25'>EXPERIENCES</span>
               </motion.h2>
 
-              {/* Image 1 - desktop only */}
+              {/* Image 1 */}
               <FloatingBoat
                 index={0}
                 className='absolute hidden md:block z-0'
@@ -99,17 +99,17 @@ export function About() {
                   transition={transitionXDelayed(D_IMG_1)}
                 >
                   <Image
-                    src='/images/image-01d.png'
+                    src='/images/projects/sociality.webp'
                     alt=''
-                    width={238}
-                    height={178}
-                    className='w-full h-auto'
+                    width={762}
+                    height={568}
+                    className='w-full h-auto rounded-xl'
                     sizes='20vw'
                   />
                 </motion.div>
               </FloatingBoat>
 
-              {/* Image 2 - desktop only */}
+              {/* Image 2 */}
               <FloatingBoat
                 index={1}
                 className='absolute hidden md:block z-1'
@@ -123,17 +123,17 @@ export function About() {
                   transition={transitionXDelayed(D_IMG_2)}
                 >
                   <Image
-                    src='/images/image-02d.png'
+                    src='/images/projects/company-profile.webp'
                     alt=''
-                    width={250}
-                    height={187}
-                    className='w-full h-auto'
+                    width={762}
+                    height={568}
+                    className='w-full h-auto rounded-xl'
                     sizes='21vw'
                   />
                 </motion.div>
               </FloatingBoat>
 
-              {/* Image 3 - desktop only */}
+              {/* Image 3 */}
               <FloatingBoat
                 index={2}
                 className='absolute hidden md:block z-4'
@@ -147,11 +147,11 @@ export function About() {
                   transition={transitionDelayed(D_IMG_3)}
                 >
                   <Image
-                    src='/images/image-03d.png'
+                    src='/images/projects/resto.webp'
                     alt=''
-                    width={117}
-                    height={88}
-                    className='w-full h-auto'
+                    width={762}
+                    height={568}
+                    className='w-full h-auto rounded-xl'
                     sizes='10vw'
                   />
                 </motion.div>
@@ -168,13 +168,14 @@ export function About() {
             transition={transitionDelayed(D_TEXT)}
             className='text-md md:text-sec-body font-medium tracking-t-none text-neutral-400 text-center w-full md:max-w-249'
           >
-            I love turning designs into interactive, high-performance websites.
-            With a keen eye for detail and a deep understanding of frontend
-            technologies, I create smooth and visually appealing user
-            experiences.
+            I&apos;m a frontend developer who turns design specs into fast,
+            pixel-accurate React and Next.js apps. I build complete products
+            (authentication, data fetching, forms, cart and checkout flows) in
+            TypeScript, backed by automated tests and CI. Open to remote roles
+            with US and Canadian teams, and flexible to work in your time zone.
           </motion.p>
 
-          {/* Mobile image */}
+          {/* Mobile images */}
           <div className='relative w-full aspect-393/288 md:hidden'>
             <FloatingBoat
               index={0}
@@ -189,11 +190,11 @@ export function About() {
                 transition={transitionXDelayed(D_IMG_1)}
               >
                 <Image
-                  src='/images/image-01d.png'
+                  src='/images/projects/sociality.webp'
                   alt=''
-                  width={170}
-                  height={127}
-                  className='w-full h-auto'
+                  width={762}
+                  height={568}
+                  className='w-full h-auto rounded-xl'
                   sizes='43vw'
                 />
               </motion.div>
@@ -212,11 +213,11 @@ export function About() {
                 transition={transitionXDelayed(D_IMG_2)}
               >
                 <Image
-                  src='/images/image-02d.png'
+                  src='/images/projects/company-profile.webp'
                   alt=''
-                  width={134}
-                  height={99}
-                  className='w-full h-auto'
+                  width={762}
+                  height={568}
+                  className='w-full h-auto rounded-xl'
                   sizes='34vw'
                 />
               </motion.div>
@@ -235,11 +236,11 @@ export function About() {
                 transition={transitionDelayed(D_IMG_3)}
               >
                 <Image
-                  src='/images/image-03d.png'
+                  src='/images/projects/resto.webp'
                   alt=''
-                  width={132}
-                  height={100}
-                  className='w-full h-auto'
+                  width={762}
+                  height={568}
+                  className='w-full h-auto rounded-xl'
                   sizes='34vw'
                 />
               </motion.div>
