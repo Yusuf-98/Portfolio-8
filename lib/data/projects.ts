@@ -248,7 +248,14 @@ export const projects: Project[] = [
       'Add, edit, complete and delete tasks',
       'localStorage persistence with an initial Fetch API load',
     ],
-    stack: ['JavaScript', 'DOM API', 'Fetch API', 'LocalStorage'],
+    stack: [
+      'HTML',
+      'CSS',
+      'JavaScript',
+      'DOM API',
+      'Fetch API',
+      'LocalStorage',
+    ],
     liveUrl: 'https://todo-list-by-yusuf-ar.vercel.app/',
     repoUrl: 'https://github.com/Yusuf-98/Todo-List-by-Yusuf-AR',
     gallery: [
