@@ -17,6 +17,8 @@ const titleVariants = {
   hover: { color: '#91FF02' },
 };
 
+const MAX_CHIPS = 3;
+
 // --- Portfolio Card ---
 interface PortfolioCardProps {
   image: string;
@@ -25,6 +27,7 @@ interface PortfolioCardProps {
   stack: string[];
   liveUrl: string;
   repoUrl: string;
+  onOpen: () => void;
   index?: number;
 }
 
@@ -35,6 +38,7 @@ export default function PortfolioCard({
   stack,
   liveUrl,
   repoUrl,
+  onOpen,
   index = 0,
 }: PortfolioCardProps) {
   return (
@@ -47,28 +51,34 @@ export default function PortfolioCard({
       transition={transitionDelayed(index * 0.15)}
       className='flex flex-col gap-3 md:gap-sec-card-title w-full cursor-pointer'
     >
-      {/* Image */}
-      <div
-        className='relative w-full overflow-hidden rounded-2xl md:rounded-[20px]'
-        style={{ aspectRatio: '381/284' }}
+      {/* Preview */}
+      <button
+        type='button'
+        onClick={onOpen}
+        aria-label={`View ${title} details`}
+        className='flex w-full cursor-pointer flex-col gap-3 text-left md:gap-sec-card-title'
       >
-        <Image
-          src={image}
-          alt={title}
-          fill
-          sizes='(max-width: 768px) 100vw, 33vw'
-          className='object-cover'
-        />
-      </div>
+        <div
+          className='relative w-full overflow-hidden rounded-2xl md:rounded-[20px]'
+          style={{ aspectRatio: '381/284' }}
+        >
+          <Image
+            src={image}
+            alt=''
+            fill
+            sizes='(max-width: 768px) 100vw, 33vw'
+            className='object-cover'
+          />
+        </div>
 
-      {/* Title */}
-      <motion.h3
-        variants={titleVariants}
-        transition={{ duration: 0.2 }}
-        className='font-bold text-xl md:text-sec-card-title'
-      >
-        {title}
-      </motion.h3>
+        <motion.h3
+          variants={titleVariants}
+          transition={{ duration: 0.2 }}
+          className='font-bold text-xl md:text-sec-card-title'
+        >
+          {title}
+        </motion.h3>
+      </button>
 
       {/* Description */}
       <p className='font-normal text-neutral-400 text-sm md:text-body-responsive'>
@@ -77,7 +87,7 @@ export default function PortfolioCard({
 
       {/* Stack */}
       <ul className='flex flex-wrap gap-2'>
-        {stack.map((tech) => (
+        {stack.slice(0, MAX_CHIPS).map((tech) => (
           <li
             key={tech}
             className='rounded-full border border-neutral-800 px-2.5 py-1 text-xs font-medium text-neutral-400'
@@ -85,6 +95,11 @@ export default function PortfolioCard({
             {tech}
           </li>
         ))}
+        {stack.length > MAX_CHIPS && (
+          <li className='rounded-full border border-neutral-800 px-2.5 py-1 text-xs font-medium text-neutral-400'>
+            +{stack.length - MAX_CHIPS}
+          </li>
+        )}
       </ul>
 
       {/* Links */}

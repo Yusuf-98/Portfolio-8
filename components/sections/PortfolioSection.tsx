@@ -3,7 +3,10 @@
 import { BoxPattern } from '@/components/ui/BoxPattern';
 import PortfolioCard from '@/components/portfolio/PortfolioCard';
 import { Container } from '../layout/Container';
+import { useState } from 'react';
 import { motion } from 'framer-motion';
+import ProjectModal from '@/components/portfolio/ProjectModal';
+import { projects } from '@/lib/data/projects';
 import { FloatingBoat } from '@/lib/animations/floating-boat';
 import {
   fadeInUp,
@@ -12,73 +15,10 @@ import {
   transitionDelayed,
 } from '@/lib/animations/staggered-item';
 
-// --- Portfolio data ---
-const portfolioData = [
-  {
-    id: 1,
-    image: '/images/projects/sociality.webp',
-    title: 'Sociality',
-    description:
-      'Social media app with a feed, posts, comments, likes, saves, follows and profiles, built on a REST API.',
-    stack: ['Next.js', 'TypeScript', 'TanStack Query', 'Redux Toolkit', 'Tailwind CSS'],
-    liveUrl: 'https://social-media-app-by-yusuf.vercel.app/',
-    repoUrl: 'https://github.com/Yusuf-98/social-media-app-by-yusuf',
-  },
-  {
-    id: 2,
-    image: '/images/projects/library.webp',
-    title: 'Booky Library App',
-    description:
-      'Library web app for browsing, borrowing and reviewing books, with an admin area for books, users and loans.',
-    stack: ['React', 'TypeScript', 'Vite', 'TanStack Query', 'Redux Toolkit'],
-    liveUrl: 'https://library-web-by-yusuf.vercel.app/',
-    repoUrl: 'https://github.com/Yusuf-98/Library-Web-App',
-  },
-  {
-    id: 3,
-    image: '/images/projects/resto.webp',
-    title: 'Foody Restaurant App',
-    description:
-      'Restaurant ordering app: browse and filter restaurants, manage a cart, check out and track orders.',
-    stack: ['Next.js', 'TypeScript', 'TanStack Query', 'Zustand', 'Tailwind CSS'],
-    liveUrl: 'https://resto-app-by-yusuf-ar.vercel.app/',
-    repoUrl: 'https://github.com/Yusuf-98/Resto-App-by-Yusuf-AR',
-  },
-  {
-    id: 4,
-    image: '/images/projects/movie.webp',
-    title: 'Movie Explorer',
-    description:
-      'Movie discovery app on the TMDB API with trending titles, search, cast and trailers, and a persistent favorites list.',
-    stack: ['React', 'TypeScript', 'TanStack Query', 'Zustand', 'Tailwind CSS'],
-    liveUrl: 'https://movie-app-by-yusuf-ar.vercel.app/',
-    repoUrl: 'https://github.com/Yusuf-98/Movie-App',
-  },
-  {
-    id: 5,
-    image: '/images/projects/company-profile.webp',
-    title: 'Company Profile',
-    description:
-      'Responsive, animated company-profile landing page with a light and dark theme toggle.',
-    stack: ['React', 'TypeScript', 'Vite', 'Tailwind CSS', 'Vitest'],
-    liveUrl: 'https://company-profile-by-yusuf-ar.vercel.app/',
-    repoUrl: 'https://github.com/Yusuf-98/Company-Profile-by-Yusuf-AR',
-  },
-  {
-    id: 6,
-    image: '/images/projects/todo-list.webp',
-    title: 'To-Do List',
-    description:
-      'To-do app in vanilla JavaScript with task priorities, progress tracking and localStorage persistence.',
-    stack: ['JavaScript', 'DOM API', 'Fetch API', 'LocalStorage'],
-    liveUrl: 'https://todo-list-by-yusuf-ar.vercel.app/',
-    repoUrl: 'https://github.com/Yusuf-98/Todo-List-by-Yusuf-AR',
-  },
-];
-
-
 // --- Portfolio Section ---
 export default function PortfolioSection() {
+  const [activeIndex, setActiveIndex] = useState<number | null>(null);
+
   return (
     <section
       id='portfolio'
@@ -125,7 +65,7 @@ export default function PortfolioSection() {
         <div className='hidden md:flex flex-col gap-12'>
           {/* Row 1 */}
           <div className='flex flex-row gap-5'>
-            {portfolioData.slice(0, 3).map((item, i) => (
+            {projects.slice(0, 3).map((item, i) => (
               <div
                 key={item.id}
                 className={`flex-1${i === 1 ? ' relative' : ''}`}
@@ -137,6 +77,7 @@ export default function PortfolioSection() {
                   stack={item.stack}
                   liveUrl={item.liveUrl}
                   repoUrl={item.repoUrl}
+                  onOpen={() => setActiveIndex(i)}
                   index={i}
                 />
                 {/* Visit button — hanya card nomor 2 */}
@@ -170,7 +111,7 @@ export default function PortfolioSection() {
 
           {/* Row 2 */}
           <div className='flex flex-row gap-5'>
-            {portfolioData.slice(3, 6).map((item, i) => (
+            {projects.slice(3, 6).map((item, i) => (
               <div key={item.id} className='flex-1'>
                 <PortfolioCard
                   image={item.image}
@@ -179,6 +120,7 @@ export default function PortfolioSection() {
                   stack={item.stack}
                   liveUrl={item.liveUrl}
                   repoUrl={item.repoUrl}
+                  onOpen={() => setActiveIndex(i + 3)}
                   index={i + 3}
                 />
               </div>
@@ -188,7 +130,7 @@ export default function PortfolioSection() {
 
         {/* Mobile: 1 column, semua card */}
         <div className='flex md:hidden flex-col gap-8'>
-          {portfolioData.map((item, i) => (
+          {projects.map((item, i) => (
             <PortfolioCard
               key={item.id}
               image={item.image}
@@ -197,6 +139,7 @@ export default function PortfolioSection() {
               stack={item.stack}
               liveUrl={item.liveUrl}
               repoUrl={item.repoUrl}
+              onOpen={() => setActiveIndex(i)}
               index={i}
             />
           ))}
@@ -215,6 +158,13 @@ export default function PortfolioSection() {
           <BoxPattern rotate={270} />
         </motion.div>
       </Container>
+
+      {/* Project modal */}
+      <ProjectModal
+        projects={projects}
+        index={activeIndex}
+        onIndexChange={setActiveIndex}
+      />
     </section>
   );
 }
