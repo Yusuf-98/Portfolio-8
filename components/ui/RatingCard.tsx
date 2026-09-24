@@ -1,6 +1,5 @@
 'use client';
 
-import Image from 'next/image';
 import { type CSSProperties, useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
@@ -13,9 +12,9 @@ type RatingCardProps = {
   introDelay?: number;
 };
 
-const SCORE_TEXT = '5.0';
-const CAPTION_TEXT = 'Many Client Trust with me';
-const STAR_COUNT = 5;
+const SCORE_TEXT = '376';
+const TAGS = ['TypeScript', 'Vitest', 'CI'];
+const CAPTION_TEXT = 'Tests passing across 5 apps';
 const BORDER_DRAW_DURATION = 700;
 const CONTENT_START_DELAY = 0;
 const TYPE_SPEED = 50;
@@ -31,7 +30,7 @@ export function RatingCard({
     'hidden'
   );
   const [scoreText, setScoreText] = useState('');
-  const [starsVisible, setStarsVisible] = useState(0);
+  const [tagsVisible, setTagsVisible] = useState(0);
   const [captionText, setCaptionText] = useState('');
   const shimmerRef = useRef<HTMLSpanElement>(null);
 
@@ -57,7 +56,7 @@ export function RatingCard({
       addTimer(() => {
         setPhase('typing');
 
-        // --- Ketik score ---
+        // --- Score ---
         let t = CONTENT_START_DELAY;
         for (let i = 1; i <= SCORE_TEXT.length; i++) {
           const captured = i;
@@ -65,15 +64,15 @@ export function RatingCard({
           t += TYPE_SPEED + Math.random() * 30;
         }
 
-        // --- Bintang satu per satu ---
+        // --- Tags ---
         t += 200;
-        for (let i = 1; i <= STAR_COUNT; i++) {
+        for (let i = 1; i <= TAGS.length; i++) {
           const captured = i;
-          addTimer(() => setStarsVisible(captured), t);
+          addTimer(() => setTagsVisible(captured), t);
           t += 140;
         }
 
-        // --- Ketik caption ---
+        // --- Caption ---
         t += 300;
         for (let i = 1; i <= CAPTION_TEXT.length; i++) {
           const captured = i;
@@ -87,7 +86,7 @@ export function RatingCard({
 
     addTimer(startIntro, introDelay);
 
-    // --- Shimmer loop sync dengan peak CornerGlow ---
+    // --- Shimmer loop ---
     const scheduleShimmer = (offset: number) => {
       const t = setTimeout(() => {
         triggerShimmer();
@@ -139,7 +138,7 @@ export function RatingCard({
         </svg>
       )}
 
-      {/* --- Corner glow pojok kiri atas --- */}
+      {/* --- Corner glow --- */}
       {phase !== 'hidden' && (
         <CornerGlow
           color='#91FF02'
@@ -151,13 +150,13 @@ export function RatingCard({
         />
       )}
 
-      {/* --- Konten card --- */}
+      {/* --- Card content --- */}
       {phase !== 'hidden' && (
         <>
           {/* Card shimmer */}
           <span ref={shimmerRef} aria-hidden className='card-shimmer-stripe' />
 
-          {/* Rating score */}
+          {/* Score */}
           <p
             className='relative z-10 font-bold text-neutral-25 min-h-[1.5em]'
             style={{ fontSize: 'clamp(24px, 5.714px + 2.3810vw, 40px)' }}
@@ -171,36 +170,30 @@ export function RatingCard({
             )}
           </p>
 
-          {/* Star icons */}
-          <div className='relative z-10 flex w-full gap-0.5'>
-            {[0, 1, 2, 3, 4].map((i) => (
+          {/* Tags */}
+          <div
+            className='relative z-10 flex w-full items-center gap-1.5'
+            style={{ height: 'clamp(24px, 14.857px + 1.1905vw, 32px)' }}
+          >
+            {TAGS.map((tag, i) => (
               <motion.span
-                key={i}
-                className='relative shrink-0'
+                key={tag}
+                className='rounded-full border border-neutral-800 px-2.5 py-0.5 font-medium text-neutral-25'
+                style={{ fontSize: 'clamp(11px, 9.2px + 0.24vw, 13px)' }}
                 initial={{ opacity: 0, scale: 0.5 }}
                 animate={
-                  i < starsVisible
+                  i < tagsVisible
                     ? { opacity: 1, scale: 1 }
                     : { opacity: 0, scale: 0.5 }
                 }
                 transition={{ duration: 0.15, ease: 'easeOut' }}
-                style={{
-                  width: 'clamp(24px, 14.857px + 1.1905vw, 32px)',
-                  height: 'clamp(24px, 14.857px + 1.1905vw, 32px)',
-                }}
               >
-                <Image
-                  src='/icons/star-desktop.png'
-                  alt=''
-                  fill
-                  sizes='32px'
-                  className='object-contain'
-                />
+                {tag}
               </motion.span>
             ))}
           </div>
 
-          {/* Rating caption */}
+          {/* Caption */}
           <p
             className='relative z-10 font-semibold text-neutral-25 min-h-[1.5em]'
             style={{ fontSize: 'clamp(16px, 11.429px + 0.5952vw, 20px)' }}
