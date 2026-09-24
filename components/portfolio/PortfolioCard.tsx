@@ -22,6 +22,9 @@ interface PortfolioCardProps {
   image: string;
   title: string;
   description: string;
+  stack: string[];
+  liveUrl: string;
+  repoUrl: string;
   index?: number;
 }
 
@@ -29,6 +32,9 @@ export default function PortfolioCard({
   image,
   title,
   description,
+  stack,
+  liveUrl,
+  repoUrl,
   index = 0,
 }: PortfolioCardProps) {
   return (
@@ -68,6 +74,40 @@ export default function PortfolioCard({
       <p className='font-normal text-neutral-400 text-sm md:text-body-responsive'>
         {description}
       </p>
+
+      {/* Stack */}
+      <ul className='flex flex-wrap gap-2'>
+        {stack.map((tech) => (
+          <li
+            key={tech}
+            className='rounded-full border border-neutral-800 px-2.5 py-1 text-xs font-medium text-neutral-400'
+          >
+            {tech}
+          </li>
+        ))}
+      </ul>
+
+      {/* Links */}
+      <div className='flex items-center gap-5 text-sm font-semibold'>
+        <a
+          href={liveUrl}
+          target='_blank'
+          rel='noopener noreferrer'
+          aria-label={`${title} live demo`}
+          className='text-primary-200 transition-opacity hover:opacity-80'
+        >
+          Live demo ↗
+        </a>
+        <a
+          href={repoUrl}
+          target='_blank'
+          rel='noopener noreferrer'
+          aria-label={`${title} source code on GitHub`}
+          className='text-neutral-25 transition-opacity hover:opacity-80'
+        >
+          GitHub ↗
+        </a>
+      </div>
     </motion.div>
   );
 }

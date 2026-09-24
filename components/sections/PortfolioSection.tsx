@@ -16,47 +16,66 @@ import {
 const portfolioData = [
   {
     id: 1,
-    image: '/images/portfolio-image01.png',
-    title: 'Dashboard SaaS Task Management',
+    image: '/images/projects/sociality.webp',
+    title: 'Sociality',
     description:
-      'Lorem ipsum dolor sit amet consectetur. Aenean sed commodo aenean nunc lobortis.',
+      'Social media app with a feed, posts, comments, likes, saves, follows and profiles, built on a REST API.',
+    stack: ['Next.js', 'TypeScript', 'TanStack Query', 'Redux Toolkit', 'Tailwind CSS'],
+    liveUrl: 'https://social-media-app-by-yusuf.vercel.app/',
+    repoUrl: 'https://github.com/Yusuf-98/social-media-app-by-yusuf',
   },
   {
     id: 2,
-    image: '/images/portfolio-image02.png',
-    title: 'Dashboard SaaS Task Management',
+    image: '/images/projects/library.webp',
+    title: 'Booky Library App',
     description:
-      'Lorem ipsum dolor sit amet consectetur. Aenean sed commodo aenean nunc lobortis.',
+      'Library web app for browsing, borrowing and reviewing books, with an admin area for books, users and loans.',
+    stack: ['React', 'TypeScript', 'Vite', 'TanStack Query', 'Redux Toolkit'],
+    liveUrl: 'https://library-web-by-yusuf.vercel.app/',
+    repoUrl: 'https://github.com/Yusuf-98/Library-Web-App',
   },
   {
     id: 3,
-    image: '/images/portfolio-image03.png',
-    title: 'Dashboard SaaS Task Management',
+    image: '/images/projects/resto.webp',
+    title: 'Foody Restaurant App',
     description:
-      'Lorem ipsum dolor sit amet consectetur. Aenean sed commodo aenean nunc lobortis.',
+      'Restaurant ordering app: browse and filter restaurants, manage a cart, check out and track orders.',
+    stack: ['Next.js', 'TypeScript', 'TanStack Query', 'Zustand', 'Tailwind CSS'],
+    liveUrl: 'https://resto-app-by-yusuf-ar.vercel.app/',
+    repoUrl: 'https://github.com/Yusuf-98/Resto-App-by-Yusuf-AR',
   },
   {
     id: 4,
-    image: '/images/portfolio-image04.png',
-    title: 'Dashboard SaaS Task Management',
+    image: '/images/projects/movie.webp',
+    title: 'Movie Explorer',
     description:
-      'Lorem ipsum dolor sit amet consectetur. Aenean sed commodo aenean nunc lobortis.',
+      'Movie discovery app on the TMDB API with trending titles, search, cast and trailers, and a persistent favorites list.',
+    stack: ['React', 'TypeScript', 'TanStack Query', 'Zustand', 'Tailwind CSS'],
+    liveUrl: 'https://movie-app-by-yusuf-ar.vercel.app/',
+    repoUrl: 'https://github.com/Yusuf-98/Movie-App',
   },
   {
     id: 5,
-    image: '/images/portfolio-image05.png',
-    title: 'Dashboard SaaS Task Management',
+    image: '/images/projects/company-profile.webp',
+    title: 'Company Profile',
     description:
-      'Lorem ipsum dolor sit amet consectetur. Aenean sed commodo aenean nunc lobortis.',
+      'Responsive, animated company-profile landing page with a light and dark theme toggle.',
+    stack: ['React', 'TypeScript', 'Vite', 'Tailwind CSS', 'Vitest'],
+    liveUrl: 'https://company-profile-by-yusuf-ar.vercel.app/',
+    repoUrl: 'https://github.com/Yusuf-98/Company-Profile-by-Yusuf-AR',
   },
   {
     id: 6,
-    image: '/images/portfolio-image06.png',
-    title: 'Dashboard SaaS Task Management',
+    image: '/images/projects/todo-list.webp',
+    title: 'To-Do List',
     description:
-      'Lorem ipsum dolor sit amet consectetur. Aenean sed commodo aenean nunc lobortis.',
+      'To-do app in vanilla JavaScript with task priorities, progress tracking and localStorage persistence.',
+    stack: ['JavaScript', 'DOM API', 'Fetch API', 'LocalStorage'],
+    liveUrl: 'https://todo-list-by-yusuf-ar.vercel.app/',
+    repoUrl: 'https://github.com/Yusuf-98/Todo-List-by-Yusuf-AR',
   },
 ];
+
 
 // --- Portfolio Section ---
 export default function PortfolioSection() {
@@ -115,6 +134,9 @@ export default function PortfolioSection() {
                   image={item.image}
                   title={item.title}
                   description={item.description}
+                  stack={item.stack}
+                  liveUrl={item.liveUrl}
+                  repoUrl={item.repoUrl}
                   index={i}
                 />
                 {/* Visit button — hanya card nomor 2 */}
@@ -154,6 +176,9 @@ export default function PortfolioSection() {
                   image={item.image}
                   title={item.title}
                   description={item.description}
+                  stack={item.stack}
+                  liveUrl={item.liveUrl}
+                  repoUrl={item.repoUrl}
                   index={i + 3}
                 />
               </div>
@@ -169,6 +194,9 @@ export default function PortfolioSection() {
               image={item.image}
               title={item.title}
               description={item.description}
+              stack={item.stack}
+              liveUrl={item.liveUrl}
+              repoUrl={item.repoUrl}
               index={i}
             />
           ))}
