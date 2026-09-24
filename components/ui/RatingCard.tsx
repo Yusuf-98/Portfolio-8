@@ -178,7 +178,7 @@ export function RatingCard({
             {TAGS.map((tag, i) => (
               <motion.span
                 key={tag}
-                className='rounded-full border border-neutral-800 px-2.5 py-0.5 font-medium text-neutral-25'
+                className='rounded-full border border-[#F3993F] bg-[#F3993F]/10 px-2.5 py-0.5 font-medium text-[#F3993F]'
                 style={{ fontSize: 'clamp(11px, 9.2px + 0.24vw, 13px)' }}
                 initial={{ opacity: 0, scale: 0.5 }}
                 animate={
