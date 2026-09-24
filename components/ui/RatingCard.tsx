@@ -12,9 +12,9 @@ type RatingCardProps = {
   introDelay?: number;
 };
 
-const SCORE_TEXT = '376';
-const TAGS = ['TypeScript', 'Vitest', 'CI'];
-const CAPTION_TEXT = 'Tests passing across 5 apps';
+const SCORE_TEXT = 'Open to work';
+const TAGS = ['Remote', 'Full-time', 'Contract'];
+const CAPTION_TEXT = 'Worldwide, any time zone';
 const BORDER_DRAW_DURATION = 700;
 const CONTENT_START_DELAY = 0;
 const TYPE_SPEED = 50;
