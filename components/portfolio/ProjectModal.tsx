@@ -6,6 +6,10 @@ import { AnimatePresence, motion } from 'framer-motion';
 import * as Dialog from '@radix-ui/react-dialog';
 import type { Project } from '@/lib/data/projects';
 
+const FILL_TOLERANCE = 1.2;
+const INSET = 0.94;
+const MAX_STAGE_VH = 70;
+
 // --- Project detail ---
 interface ProjectDetailProps {
   project: Project;
@@ -24,20 +28,62 @@ function ProjectDetail({
 }: ProjectDetailProps) {
   const [imageIndex, setImageIndex] = useState(0);
   const current = project.gallery[imageIndex];
+  const ratio = project.frameRatio;
+  const imageRatio = current.width / current.height;
+  const fills =
+    current.fit !== 'contain' &&
+    imageRatio >= ratio / FILL_TOLERANCE &&
+    imageRatio <= ratio * FILL_TOLERANCE;
+  const fitBox =
+    imageRatio > ratio
+      ? {
+          width: `${INSET * 100}%`,
+          height: `${(ratio / imageRatio) * INSET * 100}%`,
+        }
+      : {
+          width: `${(imageRatio / ratio) * INSET * 100}%`,
+          height: `${INSET * 100}%`,
+        };
 
   return (
     <div className='grid gap-8 lg:grid-cols-[minmax(0,1fr)_380px] lg:gap-12'>
       {/* Gallery */}
       <div className='flex min-w-0 flex-col gap-4'>
-        <div className='relative aspect-16/10 w-full overflow-hidden rounded-2xl border border-neutral-800 bg-neutral-950'>
-          <Image
-            key={current.src}
-            src={current.src}
-            alt={current.alt}
-            fill
-            sizes='(min-width: 1024px) 60vw, 100vw'
-            className='object-contain'
-          />
+        <div
+          className='mx-auto w-full'
+          style={{ maxWidth: `${(ratio * MAX_STAGE_VH).toFixed(1)}vh` }}
+        >
+          <div
+            className='relative w-full overflow-hidden rounded-2xl border border-neutral-800 bg-neutral-950'
+            style={{ aspectRatio: ratio }}
+          >
+            {fills ? (
+              <Image
+                key={current.src}
+                src={current.src}
+                alt={current.alt}
+                fill
+                sizes='(min-width: 1024px) 60vw, 100vw'
+                className='object-cover object-top'
+              />
+            ) : (
+              <div className='absolute inset-0 flex items-center justify-center'>
+                <div
+                  className='relative overflow-hidden rounded-xl'
+                  style={fitBox}
+                >
+                  <Image
+                    key={current.src}
+                    src={current.src}
+                    alt={current.alt}
+                    fill
+                    sizes='(min-width: 1024px) 60vw, 100vw'
+                    className='object-cover'
+                  />
+                </div>
+              </div>
+            )}
+          </div>
         </div>
 
         {/* Thumbnails */}
